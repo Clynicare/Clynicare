@@ -1,10 +1,16 @@
 import Nav from './Nav'
+
+import MainContent from './MainContent';
+import Elements from './elements';
+
+
 export default function Hero(){
     return (
-        <section className="  1w bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#4DA1A9,white_120%)] h-[100vh]">
+        <section className=" bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] h-[120vh]">
             <Nav></Nav>
             <div>
-                <h1 className="text-black">this is hero section</h1>
+                <MainContent></MainContent>
+                    <Elements></Elements>
             </div>
         </section>
     )

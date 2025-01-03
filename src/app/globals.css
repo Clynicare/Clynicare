@@ -28,6 +28,12 @@
   font-weight: 400; /* Regular */
   font-style: italic;
 }
+@font-face {
+  font-family: 'Rejouice-Headline';
+  src: url('../fonts/Rejouice-Headline.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: italic;
+}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -36,7 +42,7 @@ body {
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ffffff;
-    --foreground: lime;
+    --foreground: black;
   }
 }
 
