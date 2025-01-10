@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+import { transform } from 'next/dist/build/swc/generated-native';
+
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +10,7 @@ export default {
   ],
   theme: {
     extend: {
+    
       fontFamily: {
         
         poppins: ['Poppins'],

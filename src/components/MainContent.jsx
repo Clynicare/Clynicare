@@ -3,7 +3,7 @@ import React from 'react'
 const Content = () => {
   return (
     <div>
-        <div className="maincontent relative  ml-[100px] top-[300px] w-[600px] flex flex-col gap-5 font-rejoice">
+        <div className="maincontent relative  ml-[200px] top-[200px] w-[600px] flex flex-col gap-5 font-rejoice">
             <div className="heading     text-black">
             <span className='font-bold text-5xl leading-[50px]'>Expert Care Made <br /> Easy: Book Trusted Professionals Anytime, Anywhere</span>
 
