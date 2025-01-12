@@ -7,7 +7,7 @@ export default function Nav(){
                 <h1 className="font-rejoice font-bold text-4xl tracking-normal bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text">CLYNICARE</h1>
                 </div>
                 <div className="hidden md:flex font-rejoice">    
-                    <ul className="flex  w-[500px] justify-evenly">
+                    <ul className="flex  w-[500px] justify-evenly text-gray-500">
                         <li className=""> <a href="#">Home</a> </li>
                         <li> <a href="#">Services</a> </li>
                         <li> <a href="#">About Us</a> </li>

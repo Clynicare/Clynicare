@@ -7,6 +7,7 @@ import Thirdpage from "@/components/Thirdpage";
 import Fourthpage from "@/components/Fourthpage";
 import Doctors from "@/components/Doctors";
 import { FifthContent } from "@/components/FifthContent";
+import Footer from "@/components/Footer";
 export default function Home() {
   return (
    <>
@@ -17,6 +18,12 @@ export default function Home() {
     <FifthContent></FifthContent>
     <Fourthpage></Fourthpage>
     <Doctors></Doctors>
+
+
+
+    
+    <Footer></Footer>
+    
    </>
    
   );
