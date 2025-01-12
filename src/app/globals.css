@@ -46,11 +46,24 @@ body {
     transform: translateX(-50%);
   }
 }
+@keyframes loop-scroll-inverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
 .animate-loop-scroll {
   display: flex;
   white-space: nowrap;
   animation: loop-scroll 30s linear infinite;
+}
+.animate-loop-scroll-inverse {
+  display: flex;
+  white-space: nowrap;
+  animation: loop-scroll-inverse 30s linear infinite;
 }
 
 .image-track {
