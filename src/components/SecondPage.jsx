@@ -19,10 +19,10 @@ export default function SecondPage(){
     }
     return(
         <div className="h-[130vh] px-[180px] py-[200px] flex gap-[70px] font-rejoice">
-           <div className="leftpart  ">
-            <Image src='/images/doc.jpg' width={400} height={350}></Image>
-            <div className="rectangle relative -top-[100px] left-6 w-[350px] h-[80px] bg-white rounded-xl">
-                <div className="firstcontent flex  items-center text-center px-5 justify-between align-middle h-[100%]  ">
+           <div className="leftpart ml-5 ">
+            <Image src='/images/doc.jpg' width={400} height={350} alt="nothing"></Image>
+            <div className="rectangle relative -top-[120px] left-4 w-[350px] h-[80px] bg-white rounded-xl ">
+                <div className="firstcontent flex  items-center text-center px-5 justify-between align-middle h-[100%]   ">
                         <div className="heartfill flex">
                             <div className="bg-gradient-to-b from-[#4DA1A9] to-[#007BA7]  z-0 flex w-[40px] h-[40px] rounded-full align-middle text-center justify-center items-center"><FontAwesomeIcon icon={faHeartPulse} className="text-white text-xl" /></div>
                             <p>Choose <br /> Services</p>

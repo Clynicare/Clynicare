@@ -6,7 +6,7 @@ import Elements from './elements';
 
 export default function Hero(){
     return (
-        <section className=" bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] h-[120vh]">
+        <section className=" bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] h-[120vh] overflow-hidden">
             <Nav></Nav>
             <div>
                 <MainContent></MainContent>

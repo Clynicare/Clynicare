@@ -38,6 +38,27 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+@keyframes loop-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-loop-scroll {
+  display: flex;
+  white-space: nowrap;
+  animation: loop-scroll 30s linear infinite;
+}
+
+.image-track {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: 200%;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {

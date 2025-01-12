@@ -3,15 +3,24 @@ import React from 'react'
 
 const Fourthpage = () => {
   return (
-    <div className='bg-black h-[50vh] flex space-x-16 animate-loop-scroll'>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        <Image src='/images/child.jpg' width={300} height={300}></Image>
-        
+    <div className="bg-transparent h-[50vh] overflow-hidden">
+    <div className="flex space-x-16 animate-loop-scroll">
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      {/* Duplicate images for seamless loop */}
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+      <Image src="/images/child.jpg" width={300} height={300} alt="Child" />
+    </div>
     </div>
   )
 }
