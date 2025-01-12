@@ -2,7 +2,7 @@ import React from 'react'
 
 const Content = () => {
   return (
-    <div>
+    <div className='flex'>
         <div className="maincontent relative  ml-[200px] top-[200px] w-[600px] flex flex-col gap-5 font-rejoice">
             <div className="heading     text-black">
             <span className='font-bold text-5xl leading-[50px]'>Expert Care Made <br /> Easy: Book Trusted Professionals Anytime, Anywhere</span>
@@ -18,6 +18,11 @@ const Content = () => {
                
             </div>
             </div>
+            
+            <div className="landingImage">
+              {/* <img src="/images/landingimage.jpg" alt="" /> */}
+            </div>
+
     </div>
   )
 }
