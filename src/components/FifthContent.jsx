@@ -2,7 +2,7 @@ import React from 'react'
 
 export const FifthContent = () => {
   return (
-    <div className='h-[80vh] w-[100%] flex flex-col items-center justify-center bg-black '>
+    <div className='h-[30vh] w-[100%] flex flex-col items-center justify-center  '>
         <div className='text-center w-[40%] '>Embark on a journey toward holistic health with our expertly designed therapies, each tailored
 to nourish your mind, body, and soul. Our specialized services offer <br /> a comprehensive
 approach to wellbeing, addressing your unique needs and goals.</div>

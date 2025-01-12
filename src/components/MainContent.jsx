@@ -1,13 +1,8 @@
 import React from 'react'
 const Content = () => {
   return (
-<<<<<<< HEAD
     <div className='flex gap-[100px]'>
         <div className="maincontent relative  ml-[150px] top-[200px] w-[600px] flex flex-col gap-5 font-rejoice">
-=======
-    <div className='flex'>
-        <div className="maincontent relative  ml-[200px] top-[200px] w-[600px] flex flex-col gap-5 font-rejoice">
->>>>>>> 4d7a54f3e7ea6cb66673041d04095376c8b35eec
             <div className="heading     text-black">
             <span className='font-bold text-5xl leading-[50px]'>Expert Care Made <br /> Easy: Book Trusted Professionals Anytime, Anywhere</span>
 
@@ -23,13 +18,6 @@ const Content = () => {
             </div>
             </div>
             
-<<<<<<< HEAD
-=======
-            <div className="landingImage">
-              {/* <img src="/images/landingimage.jpg" alt="" /> */}
-            </div>
-
->>>>>>> 4d7a54f3e7ea6cb66673041d04095376c8b35eec
     </div>
   )
 }
