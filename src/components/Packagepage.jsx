@@ -29,7 +29,7 @@ const Packagepage = () => {
     }
   return (
     
-    <div className='h-[120vh] justify-center items-center flex flex-col gap-5'>
+    <div className='h-[130vh] justify-center items-center flex flex-col gap-5 '>
         <div className="topcontent flex flex-col gap-3 justify-center items-center text-center ">
             <h1  className='font-medium text-orange-400 font-rejoice'>
             Monthly Treatment Plans

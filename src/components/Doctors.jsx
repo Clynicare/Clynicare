@@ -32,7 +32,7 @@ const Doctors = () => {
     ]
 
   return (
-<div className=' doctorsPage w-[100%] h-[150vh] mt-5 px-[100px] flex flex-col gap-10'  >
+<div className=' doctorsPage w-[100%] h-[120vh] mt-5 px-[100px] flex flex-col gap-10 ' >
 
             <div className='flex flex-col justify-center items-center text-center'>
             <div className="topContent flex flex-col gap-5 text-center items-center justify-center w-[60%] " >

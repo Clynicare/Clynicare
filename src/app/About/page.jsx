@@ -15,7 +15,7 @@ export const Page = () => {
 
           <div className="aboutContent flex flex-col gap-[30px]">
 
-                     <div className="aboutContentOne h-[70vh] w-[100%] px-[100px] flex py-[50px] gap-[30px] ">
+                     <div className="aboutContentOne h-[70vh] w-[100%] px-[100px] flex py-[50px] gap-[30px]  ">
                            
                          <div className="contentOne h-[100%] w-[50%]  p-3  font-rejoice flex flex-col gap-[20px] ">
                          <h1 className='text-[40px] ' > Our Mission</h1>

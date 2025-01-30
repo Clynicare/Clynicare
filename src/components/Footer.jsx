@@ -38,7 +38,7 @@ export default function Footer() {
             <Link href="/appStore">
               <div className="appleIcon h-[40px] w-[100px] border-black  border-2 rounded-lg flex items-center px-1 gap-[5px]">
 
-                <FontAwesomeIcon icon={faApple} className='text-2xl '></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faApple} className='text-2xl'></FontAwesomeIcon>
                    <div className="appStore flex flex-col ml-[1px]">
                     <small className='text-[8px] '>Download on the </small>
                     <p className='text-[12px] font-bold'> App Store</p>
@@ -72,8 +72,8 @@ export default function Footer() {
 
         <div className="terms">
             <div className="links flex gap-3">
-               <Link href="/about"className='text-sm text-black/50' > Terms & Conditions </Link>
-               <Link href="/about" className='text-sm text-black/50'> Privacy Policy</Link>
+               <Link href="/Terms-and-Conditions"className='text-sm text-black/50' > Terms & Conditions </Link>
+               <Link href="/Privacy-Policy" className='text-sm text-black/50'> Privacy Policy</Link>
             </div>
         </div>
 

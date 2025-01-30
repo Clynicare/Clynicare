@@ -8,9 +8,9 @@ export default function Nav(){
                 </div>
                 <div className="hidden md:flex font-rejoice">    
                     <ul className="flex  w-[500px] justify-evenly text-gray-500">
-                        <li className=""> <a href="#">Home</a> </li>
+                        <li className=""> <a href="/Hero">Home</a> </li>
                         <li> <a href="#">Services</a> </li>
-                        <li> <a href="#">About Us</a> </li>
+                        <li> <a href="/About">About Us</a> </li>
                         <li> <a href="#">Contact Us</a> </li>  
                         <li> <a href="#">Help</a> </li>  
                     </ul>
