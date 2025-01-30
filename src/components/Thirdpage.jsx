@@ -3,16 +3,16 @@ import React from 'react'
 
 const Thirdpage = () => {
   return (
-    <div className='h-[150vh] bg-[radial-gradient(ellipse_300%_500%_at_top_right,#007aa79d,white_30%)] flex flex-col gap-10 '>
+    <div className='h-[130vh] bg-[radial-gradient(ellipse_300%_500%_at_top_right,#007aa79d,white_30%)] flex flex-col gap-10 overflow-hidden'>
         <div className="topcontent flex  flex-col text-center justify-center items-center gap-6">    
 <span className='text-orange-400 mt-[100px]'> List of therapies</span>
 
 <h1 className='font-bold text-5xl font-rejoice'>Explore Our Wide Secturum <br /> Of Professional Therapeutic Services</h1>
 <p className='text-black/50 font-rejoice font-light'>Embark on a journey toward holistic health with our Expertly designed therapies,each tailored to nourish your mind,<br />body and soul. Our specialized services offer a comprehensive approach to well being addressing your unique needs and goals.</p>
         </div>
-        <div className="bottomcontent flex">
+        <div className="bottomcontent flex px-[50px] ">
             <div className="leftcontent w-[50%] h-[500px] p-[100px] flex flex-col gap-4 font-rejoice">
-                <h1 className='font-bold font-rejoice text-2xl'>Stomach Flu IV</h1>
+                <h1 className='font-bold font-rejoice text-2xl -mt-[75px]'>Stomach Flu IV</h1>
                 <p className='font-semibold  '>This is the name of the product </p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis deleniti cumque harum a quos modi provident, quidem officia aspernatur sed eos maiores cum reprehenderit ut, suscipit repellendus obcaecati ratione! Dolor?</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis deleniti cumque harum a quos modi provident, quidem officia aspernatur sed eos maiores cum reprehenderit ut, suscipit repellendus obcaecati ratione! Dolor?</p>
@@ -23,7 +23,7 @@ const Thirdpage = () => {
                     </div>
             </div>
             <div className="rightcontent w-[50%]  h-[500px] text-white flex justify-center items-center bg-blacks">
-                <Image src='/images/Nurse.jpg' width={300} height={300} className='mix-blend-multiply'></Image>
+                <Image src='/images/Nursecare.png' width={600} height={600} className=''></Image>
                 </div>
 
         </div>
