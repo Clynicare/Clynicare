@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const FifthContent = () => {
+export default function FifthContent(){
   return (
     <div className='h-[30vh] w-[100%] flex flex-col items-center justify-center  gap-5 py-10'>
         <div className='text-center w-[60%]  font-medium text-lg font-rejoice py-'>Embark on a journey toward holistic health with our expertly designed therapies, each tailored
