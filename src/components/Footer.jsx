@@ -66,7 +66,7 @@ export default function Footer() {
     <div className="bottom  h-[30%]  flex justify-between items-center  text-sm text-black/50">
         <div className="copyRight">
             <p>Copyright @2024 Clynicare. All Rights Reserved. Designed and Developed by
-            <Link href="/about" className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-rejoice'> CLYNICARE.COM </Link>
+            <Link href="/about" className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-rejoice'> ONEDUMB TEAM </Link>
                  </p>
         </div>
 

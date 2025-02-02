@@ -6,7 +6,7 @@ export default function page() {
   return (
     <div>
            <Nav></Nav>
-           <div className='Terms-and-Conditions h-[170vh] w-[100%]  '>
+           <div className='Terms-and-Conditions h-[170vh] w-[100%]  ] '>
 
               <div className="aboutimage ">
                 <img src="/images/abouttwo.jpg" alt="" className='w-[100%] h-[60vh] object-cover ml-[-2px] relative rounded-tl-3xl rounded-tr-3xl' />       
