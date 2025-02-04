@@ -25,7 +25,7 @@ const services = [
     icon: Bandage,
     title: "Wound Care",
     description: "Professional dressing and wound management services with sterile techniques.",
-    image: "/images/woundDressing.jpg",
+    image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800",
     price: 90,
     duration: "40 min"
   },
