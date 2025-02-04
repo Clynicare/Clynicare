@@ -2,109 +2,71 @@ import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
 import React from 'react'
 
-export const Page = () => {
+export default function Page() {
   return (
     <div>
-    <Nav></Nav>
-         
-        <div className="aboutUS h-[280vh] w-[100%]">
-          <div className="aboutimage ">
-             <img src="/images/abouttwo.jpg" alt="" className='w-[100%] h-[60vh] object-cover ml-[-2px] relative rounded-tl-3xl rounded-tr-3xl' />       
-             <h1 className='absolute text-gray-500 top-[27%] left-[40%] z-10 font-rejoice text-[80px] '  > About Us</h1>
-          </div>
-
-          <div className="aboutContent flex flex-col gap-[30px]">
-
-                     <div className="aboutContentOne h-[70vh] w-[100%] px-[100px] flex py-[50px] gap-[30px]  ">
-                           
-                         <div className="contentOne h-[100%] w-[50%]  p-3  font-rejoice flex flex-col gap-[20px] ">
-                         <h1 className='text-[40px] ' > Our Mission</h1>
-                         <p>    <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Patient-Centered Care</span>: "Our mission is to provide accessible, timely, and
-                              compassionate nursing care to all our patients through a seamless
-                              appointment system, ensuring every patient feels heard, cared for, and
-                              satisfied with their healthcare experience."</p>
-
-                          <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Innovation in Healthcare</span> : "We aim to revolutionize the way nurse
-                                appointments are managed by integrating cutting-edge technology that
-                                optimizes efficiency, enhances nurse-patient communication, and improves
-                                health outcomes."</p> 
-
-                                <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Community Health</span> : "Our mission is to serve our community by offering
-                                    convenient, comprehensive nurse-led health services in a welcoming
-                                    environment, fostering healthier lives across all ages and backgrounds."</p>   
-                         </div>
-
-                         <div className="imageOne  h-[100%] w-[50%]   className='object-cover ">
-                                      
-                                      <img className=' rounded-xl' src="/images/aboutimgone.jpg" alt="" />
-                         </div>
-                       
-                     </div>
-
-                     <div className="aboutContentTwo h-[70vh] w-[100%] px-[100px] flex py-[50px] gap-[30px]">
-
-                     <div className="imageOne  h-[100%] w-[50%]   className='object-cover ">
-                                      
-                                      <img className=' rounded-xl' src="/images/aboutimgone.jpg" alt="" />
-                         </div>
-                           
-                         <div className="contentOne h-[100%] w-[50%]  p-3  font-rejoice flex flex-col gap-[20px] ">
-                         <h1 className='text-[40px] ' >Our Approach  </h1>
-                         <p>    <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Patient-Centered Care</span>: "Our mission is to provide accessible, timely, and
-                              compassionate nursing care to all our patients through a seamless
-                              appointment system, ensuring every patient feels heard, cared for, and
-                              satisfied with their healthcare experience."</p>
-
-                          <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Our Approach </span> : "We aim to revolutionize the way nurse
-                                appointments are managed by integrating cutting-edge technology that
-                                optimizes efficiency, enhances nurse-patient communication, and improves
-                                health outcomes."</p> 
-
-                                <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Community Health</span> : "Our mission is to serve our community by offering
-                                    convenient, comprehensive nurse-led health services in a welcoming
-                                    environment, fostering healthier lives across all ages and backgrounds."</p>   
-                         </div>
-
-                        
-                       
-                     </div>
-
-                     <div className="aboutContentThird h-[70vh] w-[100%] px-[100px] flex py-[50px] gap-[30px] ">
-                           
-                         <div className="contentOne h-[100%] w-[50%]  p-3  font-rejoice flex flex-col gap-[20px] ">
-                         <h1 className='text-[40px] ' >Our Process</h1>
-                         <p>    <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Patient-Centered Care</span>: "Our mission is to provide accessible, timely, and
-                              compassionate nursing care to all our patients through a seamless
-                              appointment system, ensuring every patient feels heard, cared for, and
-                              satisfied with their healthcare experience."</p>
-
-                          <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Innovation in Healthcare</span> : "We aim to revolutionize the way nurse
-                                appointments are managed by integrating cutting-edge technology that
-                                optimizes efficiency, enhances nurse-patient communication, and improves
-                                health outcomes."</p> 
-
-                                <p> <span className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'>Community Health</span> : "Our mission is to serve our community by offering
-                                    convenient, comprehensive nurse-led health services in a welcoming
-                                    environment, fostering healthier lives across all ages and backgrounds."</p>   
-                         </div>
-
-                         <div className="imageOne  h-[100%] w-[50%]   className='object-cover ">
-                                      
-                                      <img className=' rounded-xl' src="/images/aboutimgone.jpg" alt="" />
-                         </div>
-                       
-                     </div>
-
-                     
-
-          </div>
-        
+      <Nav />
+      <div className='aboutUS min-h-screen w-full'>
+        <div className='relative'>
+          <img 
+            src='/images/abouttwo.jpg' 
+            alt='About' 
+            className='w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover rounded-tl-3xl rounded-tr-3xl' 
+          />
+          <h1 
+            className='absolute text-gray-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+            z-10 font-rejoice text-3xl sm:text-4xl md:text-6xl text-center'
+          >
+            About Us
+          </h1>
         </div>
-
-      <Footer></Footer>
-      
+        <div className='aboutContent flex flex-col gap-12 px-4 sm:px-6 md:px-[100px] py-10'>
+          {[{
+            title: 'Our Mission',
+            text: [
+              'Our mission is to provide accessible, timely, and compassionate nursing care to all our patients through a seamless appointment system.',
+              'We aim to revolutionize the way nurse appointments are managed by integrating cutting-edge technology.',
+              'Our mission is to serve our community by offering convenient, comprehensive nurse-led health services.'
+            ],
+            image: '/images/aboutimgone.jpg',
+            reverse: false
+          }, {
+            title: 'Our Approach',
+            text: [
+              'We ensure every patient feels heard, cared for, and satisfied with their healthcare experience.',
+              'Our approach focuses on enhancing nurse-patient communication and improving health outcomes.',
+              'We foster healthier lives across all ages and backgrounds through our services.'
+            ],
+            image: '/images/aboutimgone.jpg',
+            reverse: true
+          }, {
+            title: 'Our Process',
+            text: [
+              'We provide accessible and compassionate nursing care with seamless appointment scheduling.',
+              'Our process optimizes efficiency, improves health outcomes, and enhances patient experience.',
+              'We prioritize community health by offering reliable and professional home healthcare services.'
+            ],
+            image: '/images/aboutimgone.jpg',
+            reverse: false
+          }].map((section, index) => (
+            <div 
+              key={index} 
+              className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${section.reverse ? 'md:flex-row-reverse' : ''}`}
+            >
+              <div className='w-full md:w-1/2 flex flex-col gap-4'>
+                <h1 className='text-2xl sm:text-3xl md:text-4xl font-semibold'>{section.title}</h1>
+                {section.text.map((paragraph, i) => (
+                  <p key={i} className='text-gray-600'>{paragraph}</p>
+                ))}
+              </div>
+              <div className='w-full md:w-1/2'>
+                <img src={section.image} alt={section.title} className='w-full h-auto rounded-xl' />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Footer />
     </div>
   )
 }
-
-export default Page

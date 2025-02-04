@@ -1,83 +1,94 @@
 import Link from 'next/link'
 import React from 'react'
-import { faApple, faGooglePay, faGooglePlay } from '@fortawesome/free-brands-svg-icons'
+import { faApple, faGooglePlay } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Footer() {
   return (
-    
-    <div className='footer h-[50vh] md:px-[100px]   '>
-        
-                <h1 className="font-rejoice font-bold text-4xl tracking-normal  bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text">CLYNICARE</h1>
-         
+    <div className='footer w-full px-6 md:px-[100px] py-10 bg-gray-100'>
+      
+      {/* Brand Name */}
+      <h1 className="font-rejoice font-bold text-3xl md:text-4xl tracking-normal bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text text-center md:text-left">
+        CLYNICARE
+      </h1>
 
-   <div className="main flex justify-between   mt-[50px] h-[50%]" >
+      {/* Main Footer Content */}
+      <div className="main flex flex-col md:flex-row justify-between mt-8 space-y-8 md:space-y-0">
 
-  <div className="links flex flex-row gap-20">
-        <div className="links flex flex-col ] gap-3">
-               <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'> Importent Links </p>
-               <Link href="/about"className='text-sm text-black/50' > Book Appoinmen </Link>
-               <Link href="/about" className='text-sm text-black/50'> Intake Form </Link>
+        {/* Links Section */}
+        <div className="links flex flex-col md:flex-row gap-10">
+          
+          {/* First Column */}
+          <div className="flex flex-col gap-3">
+            <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-semibold'>Important Links</p>
+            <Link href="/appointment" className='text-sm text-black/50'>Book Appointment</Link>
+            <Link href="/intake-form" className='text-sm text-black/50'>Intake Form</Link>
+          </div>
+
+          {/* Second Column */}
+          <div className="flex flex-col gap-3">
+            <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-semibold'>Help Center</p>
+            <Link href="/About" className='text-sm text-black/50'>About Us</Link>
+            <Link href="/contact" className='text-sm text-black/50'>Contact Us</Link>
+            <Link href="/pricing" className='text-sm text-black/50'>Pricing</Link>
+          </div>
+
         </div>
 
-        <div className="helpCemterlinks flex flex-col    gap-3">
-               <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'> Importent Links </p>
-              <Link href="/About" className='text-sm text-black/50'> About Us </Link>
-              <Link href="/COntact"className='text-sm text-black/50' > Contact Us </Link>
-              <Link href="/about" className='text-sm text-black/50'> Pricing </Link>
-        </div>
-        
-        </div>
+        {/* Download Section */}
+        <div className="download flex flex-col gap-3">
+          <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-semibold'>Download</p>
+          <p className='text-sm text-black/50'>
+            Your Health at Your Fingertips: Download Our App Today
+          </p>
 
-        <div className="download flex flex-col    gap-3  pr-10">
-            <p className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text'> Download </p>
-            <p className='text-sm text-black/50'> Your Health at Your <br/> Fingertips: Download Our <br/> App Today</p>
-
-            <div className="fontAwesomeIcons flex flex-row gap-3 w-[200px] h-[70px]">
-
-            <Link href="/appStore">
-              <div className="appleIcon h-[40px] w-[100px] border-black  border-2 rounded-lg flex items-center px-1 gap-[5px]">
-
-                <FontAwesomeIcon icon={faApple} className='text-2xl'></FontAwesomeIcon>
-                   <div className="appStore flex flex-col ml-[1px]">
-                    <small className='text-[8px] '>Download on the </small>
-                    <p className='text-[12px] font-bold'> App Store</p>
-                   </div>
+          {/* App Store & Google Play Links */}
+          <div className="flex gap-3">
+            
+            <Link href="/app-store">
+              <div className="flex items-center gap-2 border-2 border-black rounded-lg px-3 py-2">
+                <FontAwesomeIcon icon={faApple} className='text-2xl'/>
+                <div className="flex flex-col">
+                  <small className='text-[10px]'>Download on the</small>
+                  <p className='text-sm font-bold'>App Store</p>
+                </div>
               </div>
             </Link>
 
-              <Link href="googlePlay">
-              <div className="google h-[40px] w-[100px] border-black border-2 rounded-lg flex items-center px-1 gap-[5px] ">
-                <FontAwesomeIcon icon={faGooglePlay} className='text-[18px] text-'></FontAwesomeIcon>
-                  <div className="appStore flex flex-col ml-[1px]">
-                     <small className='text-[8px] '>GET IT ON</small>
-                     <p className='text-[11px] font-bold'> Google Play</p>
-                  </div>
+            <Link href="/google-play">
+              <div className="flex items-center gap-2 border-2 border-black rounded-lg px-3 py-2">
+                <FontAwesomeIcon icon={faGooglePlay} className='text-2xl'/>
+                <div className="flex flex-col">
+                  <small className='text-[10px]'>GET IT ON</small>
+                  <p className='text-sm font-bold'>Google Play</p>
+                </div>
               </div>
-              </Link>
+            </Link>
 
-
-            </div>
-        </div>
-    </div>
-
-     <hr />
-
-    <div className="bottom  h-[30%]  flex justify-between items-center  text-sm text-black/50">
-        <div className="copyRight">
-            <p>Copyright @2024 Clynicare. All Rights Reserved. Designed and Developed by
-            <Link href="/about" className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-rejoice'> ONEDUMB TEAM </Link>
-                 </p>
+          </div>
         </div>
 
-        <div className="terms">
-            <div className="links flex gap-3">
-               <Link href="/Terms-and-Conditions"className='text-sm text-black/50' > Terms & Conditions </Link>
-               <Link href="/Privacy-Policy" className='text-sm text-black/50'> Privacy Policy</Link>
-            </div>
+      </div>
+
+      {/* Divider */}
+      <hr className="my-6 border-gray-300" />
+
+      {/* Bottom Section */}
+      <div className="flex flex-col md:flex-row justify-between items-center text-sm text-black/50 text-center md:text-left space-y-4 md:space-y-0">
+        
+        {/* Copyright */}
+        <p>
+          © 2024 Clynicare. All Rights Reserved. Designed & Developed by
+          <Link href="/about" className='bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-semibold ml-1'>ONEDUMB TEAM</Link>
+        </p>
+
+        {/* Terms & Privacy Links */}
+        <div className="flex gap-4">
+          <Link href="/Terms-and-Conditions" className='text-sm text-black/50'>Terms & Conditions</Link>
+          <Link href="/Privacy-Policy" className='text-sm text-black/50'>Privacy Policy</Link>
         </div>
 
-    </div>
+      </div>
 
     </div>
   )
