@@ -7,7 +7,7 @@ import SecondPage from "@/components/SecondPage";
 import './fontawesome';
 import Thirdpage from "@/components/Thirdpage";
 import Fourthpage from "@/components/Fourthpage";
-import  FifthContent  from "@/components/fifthcontent";
+import  FifthContent  from "@/components/FifthContent";
 import Doctors from "@/components/Doctors";
 import Fourthinverse from "@/components/Forthinverse";
 import Packagepage from "@/components/Packagepage";
