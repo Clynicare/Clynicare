@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 
+
 const Thirdpage = () => {
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_300%_500%_at_top_right,#007aa79d,white_30%)] flex flex-col gap-10 overflow-hidden">
       <div className="topcontent flex flex-col text-center justify-center items-center gap-6 px-4 mt-24">
-        <span className="text-orange-400">List of therapies</span>
+        <span className="text-orange-400">List of Services</span>
         <h1 className="font-bold text-3xl md:text-5xl font-rejoice">
           Explore Our Wide Spectrum
           <br className="hidden md:block" /> Of Professional Therapeutic Services
@@ -15,6 +16,7 @@ const Thirdpage = () => {
           body, and soul. Our specialized services offer a comprehensive approach to well-being, addressing your unique needs and goals.
         </p>
       </div>
+      
       <div className="bottomcontent flex flex-col md:flex-row px-4 md:px-12 text-justify">
         <div className="leftcontent w-full md:w-1/2 p-4 md:p-12 flex flex-col gap-4 font-rejoice">
           <h1 className="font-bold text-xl md:text-2xl">Stomach Flu IV</h1>

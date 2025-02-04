@@ -13,6 +13,7 @@ import Fourthinverse from "@/components/Forthinverse";
 import Packagepage from "@/components/Packagepage";
 import Footer from "@/components/Footer";
 
+
 export default function Home() {
   return (
    <>
@@ -25,6 +26,7 @@ export default function Home() {
     <Doctors></Doctors>
     <Packagepage></Packagepage>
     <Footer></Footer>
+    
    </>
    
   );

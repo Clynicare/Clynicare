@@ -15,7 +15,7 @@ export default function SecondPage() {
     const toggleopen3 = () => setisopen3(prev => !prev);
 
     return (
-        <div className="h-auto px-5 md:px-[180px] py-10 md:py-[200px] flex flex-col md:flex-row gap-10 md:gap-[70px] font-rejoice">
+        <div className="h-auto px-5 md:px-[180px] py-10 md:py-[100px] flex flex-col md:flex-row gap-10 md:gap-[70px] font-rejoice ">
             <div className="leftpart flex flex-col items-center md:items-start">
                 <Image src='/images/doc.jpg' width={400} height={350} alt="Doctor" className="w-full md:w-[400px]" />
                 <div className="rectangle relative md:-top-[120px] left-0 md:left-4 w-full md:w-[350px] h-[80px] bg-white rounded-xl mt-5 md:mt-0">

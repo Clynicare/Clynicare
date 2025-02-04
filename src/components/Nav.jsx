@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Nav() {
@@ -16,7 +17,7 @@ export default function Nav() {
                 <div className="hidden md:flex font-rejoice">
                     <ul className="flex w-[500px] justify-evenly text-gray-500">
                         <li><a href="/Hero">Home</a></li>
-                        <li><a href="#">Services</a></li>
+                        <li><a href="/Services">Services</a></li>
                         <li><a href="/About">About Us</a></li>
                         <li><a href="#">Contact Us</a></li>
                         <li><a href="#">Help</a></li>
@@ -37,11 +38,11 @@ export default function Nav() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="md:hidden flex flex-col space-y-4 mt-4 text-center text-gray-500 bg-white shadow-lg rounded-lg p-4">
-                    <a href="/Hero" className="block" onClick={() => setIsMenuOpen(false)}>Home</a>
-                    <a href="#" className="block" onClick={() => setIsMenuOpen(false)}>Services</a>
-                    <a href="/About" className="block" onClick={() => setIsMenuOpen(false)}>About Us</a>
-                    <a href="#" className="block" onClick={() => setIsMenuOpen(false)}>Contact Us</a>
-                    <a href="#" className="block" onClick={() => setIsMenuOpen(false)}>Help</a>
+                    <Link href="/Hero" className="block" onClick={() => setIsMenuOpen(false)}>Home</Link>
+                    <Link href="/Services" className="block" onClick={() => setIsMenuOpen(false)}>Services</Link>
+                    <Link href="/About" className="block" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+                    <Link href="#" className="block" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
+                    <Link href="#" className="block" onClick={() => setIsMenuOpen(false)}>Help</Link>
                 </div>
             )}
         </section>

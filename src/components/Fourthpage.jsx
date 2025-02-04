@@ -3,23 +3,23 @@ import React from 'react'
 
 const Fourthpage = () => {
   return (
-    <div className="bg-transparent h-[30vh] overflow-hidden mt-[100px] mb-[50px] ">
+    <div className="bg-transparent h-[20vh] overflow-hidden mt-[100px]  ">
       <div className="flex space-x-16 animate-loop-scroll object-cover">
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/fourthOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/fourthTwo.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/forthThree.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/WoundDressing.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/urineService.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/EmergencyCare.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/forthSeven.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
         {/* Duplicate images for seamless loop */}
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/child.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
-        <Image src="/images/serviceOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/fourthOne.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/fourthTwo.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/forthThree.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/WoundDressing.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/urineService.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/EmergencyCare.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
+        <Image src="/images/forthSeven.jpg" width={300} height={300} alt="Child" className="w-[150px] h-[150px] md:w-[300px] md:h-[300px]" />
       </div>
     </div>
   )
