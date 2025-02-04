@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function FifthContent() {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 py-10  w-full">
+    <div className="flex flex-col items-center justify-center gap-5 py-[100px]  w-full  ]">
       <div className="text-center font-medium text-lg font-rejoice w-11/12 sm:w-3/4 lg:w-3/5 overflow-hidden text-ellipsis">
         Embark on a journey toward holistic health with our expertly designed therapies, each tailored
         to nourish your mind, body, and soul. Our specialized services offer

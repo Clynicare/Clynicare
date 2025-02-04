@@ -186,7 +186,7 @@ function App() {
           ))}
         </div>
       </main>
-
+             <p className='text-center font-rejoice'>More services comming soon.....</p>
       
     </div>
     <Footer></Footer>
