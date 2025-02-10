@@ -19,7 +19,7 @@ export default function Home() {
    <>
     <Hero></Hero>
     <SecondPage></SecondPage>
-    <Thirdpage></Thirdpage>
+    
     <Fourthpage></Fourthpage>
     <FifthContent></FifthContent>
     <Fourthinverse></Fourthinverse>

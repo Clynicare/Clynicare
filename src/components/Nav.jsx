@@ -16,11 +16,11 @@ export default function Nav() {
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex font-rejoice">
                     <ul className="flex w-[500px] justify-evenly text-gray-500">
-                        <li><a href="/Hero">Home</a></li>
-                        <li><a href="/Services">Services</a></li>
-                        <li><a href="/About">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><Link href="/">Home</Link></li>
+                        <li><Link href="/Services">Services</Link></li>
+                        <li><Link href="/Signup">Bookings</Link></li>
+                        <li><Link href="/About">About Us</Link></li>
+                        <li><Link href="#">Contact Us</Link></li>
                     </ul>
                 </div>
 
@@ -38,11 +38,11 @@ export default function Nav() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="md:hidden flex flex-col space-y-4 mt-4 text-center text-gray-500 bg-white shadow-lg rounded-lg p-4">
-                    <Link href="/Hero" className="block" onClick={() => setIsMenuOpen(false)}>Home</Link>
+                    <Link href="/" className="block" onClick={() => setIsMenuOpen(false)}>Home</Link>
                     <Link href="/Services" className="block" onClick={() => setIsMenuOpen(false)}>Services</Link>
+                    <Link href="/Signup" className="block" onClick={() => setIsMenuOpen(false)}>Bookings</Link>
                     <Link href="/About" className="block" onClick={() => setIsMenuOpen(false)}>About Us</Link>
                     <Link href="#" className="block" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
-                    <Link href="#" className="block" onClick={() => setIsMenuOpen(false)}>Help</Link>
                 </div>
             )}
         </section>

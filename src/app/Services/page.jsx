@@ -1,197 +1,301 @@
 'use client';
-import React, { useState } from 'react';
-import { Syringe, Droplets, Heart, Stethoscope, Microscope, Ban as Bandage, ChevronFirst as FirstAid, Activity, Calendar, Clock, DollarSign } from 'lucide-react';
+
+import { useState } from 'react';
+import { Stethoscope, X } from 'lucide-react';
+import Image from 'next/image';
 import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-        
+
+// Services Data
 const services = [
   {
-    icon: Syringe,
-    title: "Vaccinations",
-    description: "Comprehensive vaccination services for all age groups, including flu shots and travel vaccines.",
-    image: "https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?auto=format&fit=crop&q=80&w=800",
-    price: 75,
-    duration: "30 min"
+    id: 'blood-testing',
+    name: 'Blood Testing',
+    description: 'Comprehensive blood testing services at your doorstep. Our certified phlebotomists use state-of-the-art equipment for accurate results.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 50,
+    category: 'diagnostic'
   },
   {
-    icon: Droplets,
-    title: "Blood Testing",
-    description: "Advanced blood work and analysis with quick, accurate results and detailed reporting.",
-    image: "https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&q=80&w=800",
-    price: 120,
-    duration: "45 min"
+    id: 'bp-monitoring',
+    name: 'Blood Pressure Monitoring',
+    description: 'Regular blood pressure monitoring with detailed reporting and immediate medical consultation if needed.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 30,
+    category: 'diagnostic'
   },
   {
-    icon: Bandage,
-    title: "Wound Care",
-    description: "Professional dressing and wound management services with sterile techniques.",
-    image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800",
-    price: 90,
-    duration: "40 min"
+    id: 'wound-care',
+    name: 'Wound Care',
+    description: 'Professional wound cleaning, dressing, and monitoring services by experienced nurses.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 45,
+    category: 'nursing'
   },
   {
-    icon: Heart,
-    title: "Urinary Catheter Care",
-    description: "Regular heart health check-ups and continuous cardiac monitoring services.",
-    image: "/images/urineService.jpg",
-    price: 150,
-    duration: "60 min"
+    id: 'general-checkup',
+    name: 'General Health Check-up',
+    description: 'Comprehensive health assessment including vital signs, physical examination, and basic diagnostic tests.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 60,
+    category: 'preventive'
   },
   {
-    icon: Stethoscope,
-    title: "General Check-ups",
-    description: "Thorough physical examinations and health assessments by experienced professionals.",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800",
-    price: 100,
-    duration: "45 min"
+    id: 'physiotherapy',
+    name: 'Physiotherapy',
+    description: 'Personalized physiotherapy sessions for rehabilitation and pain management.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 70,
+    category: 'therapeutic'
   },
   {
-    icon: Microscope,
-    title: "Laboratory Services",
-    description: "Full-service medical laboratory offering a wide range of diagnostic tests.",
-    image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800",
-    price: 200,
-    duration: "90 min"
+    id: 'elderly-care',
+    name: 'Elderly Care',
+    description: 'Comprehensive care services for elderly patients including medication management and mobility assistance.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 55,
+    category: 'nursing'
   },
   {
-    icon: FirstAid,
-    title: "Emergency Care",
-    description: "Immediate medical attention for urgent health concerns and injuries.",
-    image: "/images/EmergencyCare.jpg",
-    price: 250,
-    duration: "60 min"
+    id: 'diabetes-management',
+    name: 'Diabetes Management',
+    description: 'Regular blood sugar monitoring, insulin administration, and dietary guidance.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 40,
+    category: 'diagnostic'
   },
   {
-    icon: Activity,
-    title: "Health Monitoring",
-    description: "Continuous health tracking and regular vital sign monitoring services.",
-    image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800",
-    price: 180,
-    duration: "75 min"
+    id: 'iv-therapy',
+    name: 'IV Therapy',
+    description: 'Professional IV therapy services including fluid administration and medication delivery.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 80,
+    category: 'therapeutic'
+  },
+  {
+    id: 'vaccination',
+    name: 'Vaccination Services',
+    description: 'Home vaccination services for all age groups with proper storage and administration.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 35,
+    category: 'preventive'
+  },
+  {
+    id: 'ecg',
+    name: 'ECG Monitoring',
+    description: 'Professional ECG monitoring and reporting with immediate doctor consultation if required.',
+    image: '/images/abouttwo.jpg',
+    pricePerHour: 65,
+    category: 'diagnostic'
   }
 ];
 
-function App() {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-
-  const handleBooking = (service) => {
-    if (!selectedDate || !selectedTime) {
-      alert("Please select both date and time for your appointment");
-      return;
-    }
-    alert(`Booking confirmed for ${service.title} on ${selectedDate} at ${selectedTime}`);
-  };
-
+// Service Card Component
+function ServiceCard({ service, onClick }) {
   return (
-    <div>
-        <Nav />
-    <div className="min-h-screen py-[100px] " >
-             <p className=' font-bold text-[30px]  text-center font-rejoice '>Services We Provide </p>
-                                    
-      {/* Main Content */}
-      <main className="container mx-auto px-4 lg:px-[100px] py-12">
-       
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-          {services.map((service, index) => (
-            <div key={index} className="group perspective">
-              <div className="relative preserve-3d duration-1000 group-hover:rotate-y-180">
-                {/* Front of card */}
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden backface-hidden">
-                  <div className="relative h-48">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                        <service.icon className="w-5 h-5 text-blue-600" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-white">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {service.duration}
-                      </div>
-                      <div className="flex items-center">
-                        <DollarSign className="w-4 h-4 mr-1" />
-                        {service.price}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back of card */}
-                <div className="absolute inset-0 bg-white rounded-xl shadow-lg p-6 backface-hidden rotate-y-180">
-                  <div className="h-full flex flex-col">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Book {service.title}</h3>
-                    
-                    <div className="space-y-4 flex-grow">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Select Date
-                        </label>
-                        <input
-                          type="date"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                          value={selectedDate}
-                          onChange={(e) => setSelectedDate(e.target.value)}
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Select Time
-                        </label>
-                        <input
-                          type="time"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                          value={selectedTime}
-                          onChange={(e) => setSelectedTime(e.target.value)}
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {service.duration}
-                        </div>
-                        <div className="flex items-center">
-                          <DollarSign className="w-4 h-4 mr-1" />
-                          {service.price}
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleBooking(service)}
-                      className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                    >
-                      Book Appointment
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    
+    <div 
+      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
+      onClick={() => onClick(service)}
+    >
+      <div className="relative h-48 w-full">
+        <Image 
+          src={service.image}
+          alt={service.name}
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="p-4">
+        <h3 className="text-xl font-semibold mb-2">{service.name}</h3>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{service.description}</p>
+        <div className="flex justify-between items-center">
+          <span className="text-primary font-semibold">${service.pricePerHour}/hour</span>
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+            {service.category}
+          </span>
         </div>
-      </main>
-             <p className='text-center font-rejoice'>More services comming soon.....</p>
-      
-    </div>
-    <Footer></Footer>
+      </div>
     </div>
   );
 }
 
-export default App;
+// Booking Modal Component
+function BookingModal({ service, onClose }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    date: '',
+    time: '',
+    address: '',
+    mobile: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Booking submitted:', { service, ...formData });
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-semibold">Book {service.name}</h2>
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+              <X size={24} />
+            </button>
+          </div>
+
+          {/* Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="relative h-48">
+              <Image 
+                src={service.image}
+                alt={service.name}
+                fill
+                className="object-cover rounded-lg"
+              />
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">{service.name}</h3>
+              <p className="text-gray-600 text-sm mb-2">{service.description}</p>
+              <p className="text-primary font-semibold">${service.pricePerHour}/hour</p>
+              <span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                {service.category}
+              </span>
+            </div>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full p-2 border rounded-md"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                <input
+                  type="tel"
+                  required
+                  className="w-full p-2 border rounded-md"
+                  value={formData.mobile}
+                  onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                <input
+                  type="date"
+                  required
+                  className="w-full p-2 border rounded-md"
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                <input
+                  type="time"
+                  required
+                  className="w-full p-2 border rounded-md"
+                  value={formData.time}
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                <textarea
+                  required
+                  className="w-full p-2 border rounded-md"
+                  rows={3}
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                />
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="mt-6 flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Book Service
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+// Main Services Page Component
+export default function ServicesPage() {
+  const [selectedService, setSelectedService] = useState(null);
+
+  const handleServiceClick = (service) => {
+    setSelectedService(service);
+  };
+
+  return (
+    <div className=''>
+      <Nav></Nav>
+    <div className="min-h-screen bg-gray-50  ">
+      {/* Header */}
+      <div className="bg-white shadow-sm ">
+        
+      </div>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8 flex-col items-center justify-center text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[50px] ">
+          <div className="flex items-center gap-3  text-center">
+            <Stethoscope className="h-8 w-8 text-blue-600" />
+            <h1 className="text-3xl font-bold text-gray-900 text-center">HomeHealth Services</h1>
+          </div>
+        </div>
+         
+          <p className="text-gray-600">Professional healthcare services in the comfort of your home</p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              onClick={handleServiceClick}
+            />
+          ))}
+        </div>
+      </main>
+      </div>
+
+      {/* Booking Modal */}
+      {selectedService && (
+        <BookingModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
+    </div>
+  );
+}
