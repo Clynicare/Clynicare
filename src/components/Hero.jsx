@@ -3,14 +3,14 @@ import MainContent from './MainContent';
 
 export default function Hero() {
     return (
-        <section className="bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] min-h-screen overflow-hidden">
+        <section className="bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] min-h-screen overflow-hidden ">
             <Nav />
             <div className="pt-20 md:pt-0 flex flex-col md:flex-row justify-between items-center md:items-start px-5 md:px-0">
                 {/* Main Content */}
                 <div className="maincontent relative z-10 md:ml-[200px] md:top-[200px] w-full md:w-[600px] flex flex-col gap-5 font-rejoice text-center md:text-left mt-10 md:mt-0">
                     <div className="heading text-black">
                         <span className='font-bold text-3xl md:text-5xl leading-tight md:leading-[50px]'>
-                            Expert Care Made <br className='hidden md:block' /> Easy: Book Trusted Professionals Anytime, Anywhere
+                        Your Health, Our Priority : <br className='hidden md:block' /> Seamless Home Care at Your Fingertips.
                         </span>
                     </div>
                     <div>
