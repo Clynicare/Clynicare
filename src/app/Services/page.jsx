@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Stethoscope, X } from 'lucide-react';
 import Image from 'next/image';
 import Nav from '@/components/Nav';
-
+import axios from 'axios'
 // Services Data
+
+
 const services = [
   {
     id: 'blood-testing',
@@ -99,19 +101,19 @@ function ServiceCard({ service, onClick }) {
     >
       <div className="relative h-48 w-full">
         <Image 
-          src={service.image}
-          alt={service.name}
+          src={service.service_image}
+          alt={service.service_name}
           fill
           className="object-cover"
         />
       </div>
       <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">{service.name}</h3>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{service.description}</p>
+        <h3 className="text-xl font-semibold mb-2">{service.service_name}</h3>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{service.service_description}</p>
         <div className="flex justify-between items-center">
-          <span className="text-primary font-semibold">${service.pricePerHour}/hour</span>
+          <span className="text-primary font-semibold">${service.service_price}/hour</span>
           <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-            {service.category}
+            {service.service_category}
           </span>
         </div>
       </div>
@@ -122,16 +124,24 @@ function ServiceCard({ service, onClick }) {
 // Booking Modal Component
 function BookingModal({ service, onClose }) {
   const [formData, setFormData] = useState({
-    name: '',
-    date: '',
-    time: '',
+    user_name: '',
+    booking_date: '',
+    booking_time: '',
     address: '',
-    mobile: ''
+    mobile_no: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    console.log('Booking submitted:', { service, ...formData });
+    const service_id=service._id
+    const bothdata={service_id, ...formData}
+    const submit_booking=await axios.post('http://localhost:7000/api/bookings',bothdata)
+    if(submit_booking.status === 200){
+      alert('Booking successful')
+    }else{
+      alert('Booking failed')
+    }
+    console.log('Booking submitted:', { service_id, ...formData });
     onClose();
   };
 
@@ -141,7 +151,7 @@ function BookingModal({ service, onClose }) {
         <div className="p-6">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-semibold">Book {service.name}</h2>
+            <h2 className="text-2xl font-semibold">Book {service.service_name}</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
               <X size={24} />
             </button>
@@ -151,18 +161,18 @@ function BookingModal({ service, onClose }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="relative h-48">
               <Image 
-                src={service.image}
-                alt={service.name}
+                src={service.service_image}
+                alt={service.service_name}
                 fill
                 className="object-cover rounded-lg"
               />
             </div>
             <div>
-              <h3 className="font-semibold mb-2">{service.name}</h3>
-              <p className="text-gray-600 text-sm mb-2">{service.description}</p>
-              <p className="text-primary font-semibold">${service.pricePerHour}/hour</p>
+              <h3 className="font-semibold mb-2">{service.service_name}</h3>
+              <p className="text-gray-600 text-sm mb-2">{service.service_description}</p>
+              <p className="text-primary font-semibold">${service.service_price}/hour</p>
               <span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                {service.category}
+                {service.service_category}
               </span>
             </div>
           </div>
@@ -176,8 +186,8 @@ function BookingModal({ service, onClose }) {
                   type="text"
                   required
                   className="w-full p-2 border rounded-md"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  value={formData.user_name}
+                  onChange={(e) => setFormData({ ...formData, user_name: e.target.value })}
                 />
               </div>
               <div>
@@ -186,8 +196,8 @@ function BookingModal({ service, onClose }) {
                   type="tel"
                   required
                   className="w-full p-2 border rounded-md"
-                  value={formData.mobile}
-                  onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                  value={formData.mobile_no}
+                  onChange={(e) => setFormData({ ...formData, mobile_no: e.target.value })}
                 />
               </div>
               <div>
@@ -196,8 +206,8 @@ function BookingModal({ service, onClose }) {
                   type="date"
                   required
                   className="w-full p-2 border rounded-md"
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  value={formData.booking_date}
+                  onChange={(e) => setFormData({ ...formData, booking_date: e.target.value })}
                 />
               </div>
               <div>
@@ -206,8 +216,8 @@ function BookingModal({ service, onClose }) {
                   type="time"
                   required
                   className="w-full p-2 border rounded-md"
-                  value={formData.time}
-                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                  value={formData.booking_time}
+                  onChange={(e) => setFormData({ ...formData, booking_time: e.target.value })}
                 />
               </div>
               <div className="md:col-span-2">
@@ -248,6 +258,16 @@ function BookingModal({ service, onClose }) {
 
 // Main Services Page Component
 export default function ServicesPage() {
+  const [servicedata,updatedservicedata]=useState([])
+  console.log("this is the service page")
+  const servicess=async()=>{
+    const serve=await axios.get('http://localhost:7000/api/services')
+    updatedservicedata(serve.data)
+  }
+  useEffect(()=>{
+    servicess()
+  },[])
+  console.log(servicedata)
   const [selectedService, setSelectedService] = useState(null);
 
   const handleServiceClick = (service) => {
@@ -278,9 +298,9 @@ export default function ServicesPage() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
+          {servicedata.map((service) => (
             <ServiceCard
-              key={service.id}
+              key={service.service_name}
               service={service}
               onClick={handleServiceClick}
             />
