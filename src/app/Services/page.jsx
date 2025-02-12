@@ -139,7 +139,7 @@ function BookingModal({ service, onClose }) {
     e.preventDefault();
     const service_id=service._id
     const bothdata={service_id, ...formData}
-    const submit_booking=await axios.post('http://localhost:7000/api/bookings',bothdata)
+    const submit_booking=await axios.post('https://clynibackend.onrender.com/api/bookings',bothdata)
     if(submit_booking.status === 200){
       alert('Booking successful')
       router.push('/bookings')
@@ -267,7 +267,7 @@ export default function ServicesPage() {
   const [servicedata,updatedservicedata]=useState([])
   console.log("this is the service page")
   const servicess=async()=>{
-    const serve=await axios.get('http://localhost:7000/api/services')
+    const serve=await axios.get('https://clynibackend.onrender.com/api/services')
     updatedservicedata(serve.data)
   }
   useEffect(()=>{
