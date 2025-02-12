@@ -24,29 +24,29 @@ export default function Page() {
           {[{
             title: 'Our Mission',
             text: [
-              'Our mission is to provide accessible, timely, and compassionate nursing care to all our patients through a seamless appointment system.',
-              'We aim to revolutionize the way nurse appointments are managed by integrating cutting-edge technology.',
-              'Our mission is to serve our community by offering convenient, comprehensive nurse-led health services.'
+              'Enhance Accessibility: To make essential medical services readily available to individuals in their homes, reducing the need for hospital visits.',
+              'Promote Preventative Care: By offering regular health check-ups and monitoring, we aim to prevent potential health issues before they become critical.',
+              'Support Paramedical Professionals: We provide opportunities for paramedical students and professionals to apply their skills and gain valuable experience.'
             ],
             image: '/images/aboutimgone.jpg',
             reverse: false
           }, {
             title: 'Our Approach',
             text: [
-              'We ensure every patient feels heard, cared for, and satisfied with their healthcare experience.',
-              'Our approach focuses on enhancing nurse-patient communication and improving health outcomes.',
-              'We foster healthier lives across all ages and backgrounds through our services.'
+              'User-Friendly Platform: Our intuitive platform allows users to easily book services, manage appointments, and communicate with healthcare providers.',
+              'Quality Assurance: We implement strict vetting processes to ensure that all paramedical professionals meet our high standards of care.',
+              'Continuous Improvement: We regularly gather feedback from users to refine our services and better meet the evolving needs of our community.'
             ],
             image: '/images/aboutimgone.jpg',
             reverse: true
           }, {
             title: 'Our Process',
             text: [
-              'We provide accessible and compassionate nursing care with seamless appointment scheduling.',
-              'Our process optimizes efficiency, improves health outcomes, and enhances patient experience.',
-              'We prioritize community health by offering reliable and professional home healthcare services.'
+              'Easy Booking: Sign up on our platform, browse available services, and schedule an appointment at your convenience.',
+              'Personalized Care: A qualified paramedical professional visits your home to provide the selected medical service, ensuring personalized attention.',
+              'Follow-Up Support: After the service, we offer follow-up support and resources to assist with your ongoing health and wellness journey.'
             ],
-            image: '/images/aboutimgone.jpg',
+            image: '/images/fourthTwo.jpg',
             reverse: false
           }].map((section, index) => (
             <div 

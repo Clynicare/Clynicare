@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation';
 
 // Services Data
-
+import Footer  from '@/components/Footer';
 
 const services = [
   {
@@ -293,7 +293,7 @@ export default function ServicesPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex-col items-center justify-center text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[50px] ">
-          <div className="flex items-center gap-3  text-center">
+          <div className="flex items-center gap-3 ">
             <Stethoscope className="h-8 w-8 text-blue-600" />
             <h1 className="text-3xl font-bold text-gray-900 text-center">HomeHealth Services</h1>
           </div>
@@ -322,6 +322,7 @@ export default function ServicesPage() {
           onClose={() => setSelectedService(null)}
         />
       )}
+      <Footer></Footer>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Nav() {
                         <li><Link href="/Services">Services</Link></li>
                         <li><Link href="/Bookings">Bookings</Link></li>
                         <li><Link href="/About">About Us</Link></li>
-                        <li><Link href="#">Contact Us</Link></li>
+                        <li><Link href="/ContactUs">Contact Us</Link></li>
                     </ul>
                 </div>
 
@@ -40,9 +40,9 @@ export default function Nav() {
                 <div className="md:hidden flex flex-col space-y-4 mt-4 text-center text-gray-500 bg-white shadow-lg rounded-lg p-4">
                     <Link href="/" className="block" onClick={() => setIsMenuOpen(false)}>Home</Link>
                     <Link href="/Services" className="block" onClick={() => setIsMenuOpen(false)}>Services</Link>
-                    <Link href="/Signup" className="block" onClick={() => setIsMenuOpen(false)}>Bookings</Link>
+                    <Link href="/About" className="block" onClick={() => setIsMenuOpen(false)}>Bookings</Link>
                     <Link href="/About" className="block" onClick={() => setIsMenuOpen(false)}>About Us</Link>
-                    <Link href="#" className="block" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
+                    <Link href="/ContactUs" className="block" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
                 </div>
             )}
         </section>

@@ -14,7 +14,7 @@ const Doctors = () => {
       content:
         "Dr. Anderson is a renowned cardiologist with over 15 years of experience in treating complex heart conditions. His innovative approach to patient care has earned him numerous accolades in the field.",
       likes: 50,
-      imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80",
+      imageUrl: "/images/updoc1.jpg",
       availability: "Mon - Fri",
       education: "MD - Harvard Medical School",
       experience: "15+ years",
@@ -31,7 +31,7 @@ const Doctors = () => {
       content:
         "Dr. Martinez is a compassionate pediatrician who has dedicated her career to children's healthcare. With 10 years of experience, she specializes in developmental pediatrics and preventive care.",
       likes: 70,
-      imageUrl: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80",
+      imageUrl: "/images/updoc5.jpg",
       availability: "Tue - Sat",
       education: "MD - Stanford University",
       experience: "10+ years",
@@ -48,7 +48,7 @@ const Doctors = () => {
       content:
         "Dr. Chen is a leading neurologist specializing in innovative treatments for neurological disorders. His research has been published in several prestigious medical journals.",
       likes: 80,
-      imageUrl: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80",
+      imageUrl: "/images/updoc3.jpg",
       availability: "Mon - Thu",
       education: "MD - Johns Hopkins University",
       experience: "12+ years",
@@ -65,7 +65,7 @@ const Doctors = () => {
       content:
         "Dr. Roberts is an experienced orthopedic surgeon known for his expertise in minimally invasive procedures. He has successfully performed over 1,000 surgeries in his career.",
       likes: 90,
-      imageUrl: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=500&q=80",
+      imageUrl: "/images/updoc4.jpg",
       availability: "Wed - Sun",
       education: "MD - Yale School of Medicine",
       experience: "18+ years",

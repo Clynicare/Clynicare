@@ -13,7 +13,7 @@ import Fourthinverse from "@/components/Forthinverse";
 import Packagepage from "@/components/Packagepage";
 import Footer from "@/components/Footer";
 // import Page from '@/app/Services/Page'
-import Page from '@/app/Signup/page'
+import ContactForm from "@/components/ContactForm";
 export default function Home() {
   return (
    <>
@@ -26,6 +26,7 @@ export default function Home() {
     <Doctors></Doctors>
     <Packagepage></Packagepage>
     <Footer></Footer>
+    
     
    </>
    
