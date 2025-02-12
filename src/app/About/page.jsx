@@ -46,7 +46,7 @@ export default function Page() {
               'Personalized Care: A qualified paramedical professional visits your home to provide the selected medical service, ensuring personalized attention.',
               'Follow-Up Support: After the service, we offer follow-up support and resources to assist with your ongoing health and wellness journey.'
             ],
-            image: '/images/aboutimgone.jpg',
+            image: '/images/fourthTwo.jpg',
             reverse: false
           }].map((section, index) => (
             <div 
