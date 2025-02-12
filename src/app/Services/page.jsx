@@ -5,6 +5,8 @@ import { Stethoscope, X } from 'lucide-react';
 import Image from 'next/image';
 import Nav from '@/components/Nav';
 import axios from 'axios'
+import { useRouter } from 'next/navigation';
+
 // Services Data
 
 
@@ -130,6 +132,8 @@ function BookingModal({ service, onClose }) {
     address: '',
     mobile_no: ''
   });
+    const router = useRouter();
+  
 
   const handleSubmit =async (e) => {
     e.preventDefault();
@@ -138,6 +142,8 @@ function BookingModal({ service, onClose }) {
     const submit_booking=await axios.post('http://localhost:7000/api/bookings',bothdata)
     if(submit_booking.status === 200){
       alert('Booking successful')
+      router.push('/bookings')
+      
     }else{
       alert('Booking failed')
     }

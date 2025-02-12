@@ -20,7 +20,7 @@ function Login() {
     const response =await axios.post('http://localhost:7000/api/user',formData)
     if(response.status ===200){
       alert("the user has been successfully created",formData.name)
-      router.push('/Services')
+      router.push('/')
     }
     // Handle form submission
     console.log(formData);
@@ -38,7 +38,7 @@ function Login() {
       <div className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="flex items-center justify-center mb-8">
-            <Heart className="h-8 w-8 text-blue-600 mr-2" />
+            <Heart className="h-8 w-8 text-[#4DA1A9] mr-2" />
             <h1 className="text-2xl font-bold text-gray-800">HealthCare Plus</h1>
           </div>
 
@@ -50,7 +50,7 @@ function Login() {
             {!isLogin && (
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                  <User className="w-4 h-4 mr-2 text-blue-500" />
+                  <User className="w-4 h-4 mr-2 text-[#4DA1A9]" />
                   Full Name
                 </label>
                 <input
@@ -67,7 +67,7 @@ function Login() {
 
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Mail className="w-4 h-4 mr-2 text-blue-500" />
+                <Mail className="w-4 h-4 mr-2 text-[#4DA1A9]" />
                 Email Address
               </label>
               <input
@@ -83,7 +83,7 @@ function Login() {
 
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Lock className="w-4 h-4 mr-2 text-blue-500" />
+                <Lock className="w-4 h-4 mr-2 text-[#4DA1A9]" />
                 Password
               </label>
               <input
@@ -117,7 +117,7 @@ function Login() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center group"
+              className="w-full bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] hover:[#007BA7] text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center group"
             >
               {isLogin ? 'Sign In' : 'Create Account'}
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +126,7 @@ function Login() {
 
           <div className="mt-6 text-center">
             <button
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => router.push('/login')}
               className="text-blue-600 hover:text-blue-700 font-medium transition"
             >
               {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
@@ -135,7 +135,7 @@ function Login() {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-600">
-          Protected by industry leading security
+          
         </div>
       </div>
     </div>
