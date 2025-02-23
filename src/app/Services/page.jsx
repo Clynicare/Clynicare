@@ -92,6 +92,7 @@ export default function ServicesPage() {
   return (
     <div>
       <Nav />
+      <Suspense fallback={<p className="text-center mt-10">Loading...</p>}>
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8 text-center">
@@ -105,6 +106,7 @@ export default function ServicesPage() {
           </div>
         </main>
       </div>
+        </Suspense>
       {selectedService && <BookingModal service={selectedService} onClose={() => setSelectedService(null)} />}
     </div>
   );
