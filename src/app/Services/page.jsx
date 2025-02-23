@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback,Suspense } from 'react';
 import { Stethoscope, X } from 'lucide-react';
 import Image from 'next/image';
 import Nav from '@/components/Nav';
@@ -92,8 +92,8 @@ export default function ServicesPage() {
   return (
     <div>
       <Nav />
-      <Suspense fallback={<p className="text-center mt-10">Loading...</p>}>
       <div className="min-h-screen bg-gray-50">
+      <Suspense fallback={<p className="text-center mt-10">Loading...</p>}>
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-900 mt-12">HomeHealth Services</h1>
@@ -105,8 +105,8 @@ export default function ServicesPage() {
             ))}
           </div>
         </main>
-      </div>
         </Suspense>
+      </div>
       {selectedService && <BookingModal service={selectedService} onClose={() => setSelectedService(null)} />}
     </div>
   );
