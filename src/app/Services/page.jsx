@@ -6,92 +6,11 @@ import Image from 'next/image';
 import Nav from '@/components/Nav';
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
-
+import { useSearchParams } from 'next/navigation';
 // Services Data
-import Footer  from '@/components/Footer';
 
-const services = [
-  {
-    id: 'blood-testing',
-    name: 'Blood Testing',
-    description: 'Comprehensive blood testing services at your doorstep. Our certified phlebotomists use state-of-the-art equipment for accurate results.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 50,
-    category: 'diagnostic'
-  },
-  {
-    id: 'bp-monitoring',
-    name: 'Blood Pressure Monitoring',
-    description: 'Regular blood pressure monitoring with detailed reporting and immediate medical consultation if needed.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 30,
-    category: 'diagnostic'
-  },
-  {
-    id: 'wound-care',
-    name: 'Wound Care',
-    description: 'Professional wound cleaning, dressing, and monitoring services by experienced nurses.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 45,
-    category: 'nursing'
-  },
-  {
-    id: 'general-checkup',
-    name: 'General Health Check-up',
-    description: 'Comprehensive health assessment including vital signs, physical examination, and basic diagnostic tests.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 60,
-    category: 'preventive'
-  },
-  {
-    id: 'physiotherapy',
-    name: 'Physiotherapy',
-    description: 'Personalized physiotherapy sessions for rehabilitation and pain management.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 70,
-    category: 'therapeutic'
-  },
-  {
-    id: 'elderly-care',
-    name: 'Elderly Care',
-    description: 'Comprehensive care services for elderly patients including medication management and mobility assistance.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 55,
-    category: 'nursing'
-  },
-  {
-    id: 'diabetes-management',
-    name: 'Diabetes Management',
-    description: 'Regular blood sugar monitoring, insulin administration, and dietary guidance.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 40,
-    category: 'diagnostic'
-  },
-  {
-    id: 'iv-therapy',
-    name: 'IV Therapy',
-    description: 'Professional IV therapy services including fluid administration and medication delivery.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 80,
-    category: 'therapeutic'
-  },
-  {
-    id: 'vaccination',
-    name: 'Vaccination Services',
-    description: 'Home vaccination services for all age groups with proper storage and administration.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 35,
-    category: 'preventive'
-  },
-  {
-    id: 'ecg',
-    name: 'ECG Monitoring',
-    description: 'Professional ECG monitoring and reporting with immediate doctor consultation if required.',
-    image: '/images/abouttwo.jpg',
-    pricePerHour: 65,
-    category: 'diagnostic'
-  }
-];
+
+
 
 // Service Card Component
 function ServiceCard({ service, onClick }) {
@@ -139,7 +58,7 @@ function BookingModal({ service, onClose }) {
     e.preventDefault();
     const service_id=service._id
     const bothdata={service_id, ...formData}
-    const submit_booking=await axios.post('https://clynibackend.onrender.com/api/bookings',bothdata)
+    const submit_booking=await axios.post('http://localhost:7000/api/bookings',bothdata)
     if(submit_booking.status === 200){
       alert('Booking successful')
       router.push('/bookings')
@@ -263,66 +182,79 @@ function BookingModal({ service, onClose }) {
 
 
 // Main Services Page Component
+
+
 export default function ServicesPage() {
-  const [servicedata,updatedservicedata]=useState([])
-  console.log("this is the service page")
-  const servicess=async()=>{
-    const serve=await axios.get('https://clynibackend.onrender.com/api/services')
-    updatedservicedata(serve.data)
-  }
-  useEffect(()=>{
-    servicess()
-  },[])
-  console.log(servicedata)
+  const [servicedata, setServiceData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
+  const searchparams=useSearchParams()
+  const nameofservice=searchparams.get('name')
+  useEffect(() => {
+    const fetchServices = async () => {
+      let url="http://localhost:7000/Services"
+      try {
+        console.log("Fetching services...");
+        if(nameofservice){
+          console.log("Fetching services for specific service name...");
+          const response = await axios.get(`http://localhost:7000/Services?name=${nameofservice}` );
+          console.log("this is the response for ",response)
+          setServiceData(response.data);
+      console.log(servicedata)
+        }else{
+        const response = await axios.get(`http://localhost:7000/Services`);
+        console.log("API Response:", response.data);
+        setServiceData(response.data);
+      console.log(servicedata)
+      }
+       
+      } catch (error) {
+        console.error("Error fetching services:", error);
+        setError("Failed to fetch services. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   const handleServiceClick = (service) => {
     setSelectedService(service);
   };
 
+  if (loading) return <p className="text-center mt-10">Loading services...</p>;
+  if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
+
   return (
-    <div className=''>
-      <Nav></Nav>
-    <div className="min-h-screen bg-gray-50  ">
-      {/* Header */}
-      <div className="bg-white shadow-sm ">
-        
-      </div>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8 flex-col items-center justify-center text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[50px] ">
-          <div className="flex items-center gap-3 ">
-            <Stethoscope className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900 text-center">HomeHealth Services</h1>
+    <div>
+      <Nav />
+      <div className="min-h-screen bg-gray-50">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mt-12" >HomeHealth Services</h1>
+            <p className="text-gray-600">Professional healthcare services at your home</p>
           </div>
-        </div>
-         
-          <p className="text-gray-600">Professional healthcare services in the comfort of your home</p>
-        </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicedata.map((service) => (
-            <ServiceCard
-              key={service.service_name}
-              service={service}
-              onClick={handleServiceClick}
-            />
-          ))}
-        </div>
-      </main>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicedata.map((service, index) => (
+              <ServiceCard
+                key={index}
+                service={service}
+                onClick={() => handleServiceClick(service)}
+              />
+            ))}
+          </div>
+        </main>
       </div>
 
-      {/* Booking Modal */}
       {selectedService && (
         <BookingModal
           service={selectedService}
           onClose={() => setSelectedService(null)}
         />
       )}
-      <Footer></Footer>
     </div>
   );
 }

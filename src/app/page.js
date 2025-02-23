@@ -21,8 +21,7 @@ export default function Home() {
     <SecondPage></SecondPage>
     
     <Fourthpage></Fourthpage>
-    <FifthContent></FifthContent>
-    <Fourthinverse></Fourthinverse>
+    
     <Doctors></Doctors>
     <Packagepage></Packagepage>
     <Footer></Footer>

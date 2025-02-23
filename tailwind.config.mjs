@@ -14,7 +14,8 @@ export default {
       fontFamily: {
         
         poppins: ['Poppins'],
-        rejoice:['Rejouice-Headline']
+        rejoice:['Rejouice-Headline'],
+        bebas:['BebasNeue-Regular']
       },
       colors: {
         background: "var(--background)",
