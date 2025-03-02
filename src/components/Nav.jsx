@@ -154,22 +154,22 @@ function Nav() {
               </a>
             </li>
             <li>
-              <a href="/services" className="hover:text-[#4DA1A9] transition-colors">
+              <a href="/Services" className="hover:text-[#4DA1A9] transition-colors">
                 Services
               </a>
             </li>
             <li>
-              <a href="/bookings" className="hover:text-[#4DA1A9] transition-colors">
+              <a href="/Bookings" className="hover:text-[#4DA1A9] transition-colors">
                 Bookings
               </a>
             </li>
             <li>
-              <a href="/about" className="hover:text-[#4DA1A9] transition-colors">
+              <a href="/About" className="hover:text-[#4DA1A9] transition-colors">
                 About Us
               </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-[#4DA1A9] transition-colors">
+              <a href="/Contact" className="hover:text-[#4DA1A9] transition-colors">
                 Contact Us
               </a>
             </li>

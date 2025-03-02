@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Nav from '@/components/Nav';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+require('dotenv').config();
+
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
 
@@ -55,11 +57,17 @@ function BookingModal({ service, onClose }) {
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700"><X size={24} /></button>
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" placeholder="Name" required className="p-2 border rounded-md" value={formData.user_name} onChange={(e) => setFormData({ ...formData, user_name: e.target.value })} />
-          <input type="tel" placeholder="Mobile Number" required className="p-2 border rounded-md" value={formData.mobile_no} onChange={(e) => setFormData({ ...formData, mobile_no: e.target.value })} />
-          <input type="date" required className="p-2 border rounded-md" value={formData.booking_date} onChange={(e) => setFormData({ ...formData, booking_date: e.target.value })} />
-          <input type="time" required className="p-2 border rounded-md" value={formData.booking_time} onChange={(e) => setFormData({ ...formData, booking_time: e.target.value })} />
-          <textarea placeholder="Address" required className="p-2 border rounded-md md:col-span-2" rows={3} value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
+          {['user_name', 'mobile_no', 'booking_date', 'booking_time', 'address'].map((field, index) => (
+            <input 
+              key={index}
+              type={field.includes('date') ? 'date' : field.includes('time') ? 'time' : 'text'}
+              placeholder={field.replace('_', ' ').toUpperCase()}
+              required
+              className={`p-2 border rounded-md ${field === 'address' ? 'md:col-span-2' : ''}`}
+              value={formData[field]}
+              onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+            />
+          ))}
           <div className="md:col-span-2 flex justify-end gap-4 mt-4">
             <button type="button" onClick={onClose} className="px-4 py-2 border rounded-md text-gray-600 hover:bg-gray-50">Cancel</button>
             <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Book Service</button>
@@ -73,12 +81,10 @@ function BookingModal({ service, onClose }) {
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
-  
 
   const getQueryParam = (key) => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(key);
+      return new URLSearchParams(window.location.search).get(key);
     }
     return null;
   };
