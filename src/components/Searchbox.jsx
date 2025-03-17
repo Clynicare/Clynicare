@@ -61,7 +61,7 @@ const ServiceSearch = () => {
 
       {/* Suggestions Dropdown */}
       {suggestions.length > 0 && (
-        <ul className="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 shadow-lg">
+        <ul className="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 shadow-lg max-h-60 overflow-y-auto text-black/60">
           {suggestions.map((suggestion, index) => (
             <li
               key={index}

@@ -11,7 +11,7 @@ export default function Page() {
           <img 
             src='/images/abouttwo.jpg' 
             alt='About' 
-            className='w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover rounded-tl-3xl rounded-tr-3xl' 
+            className='w-full h-[40vh] sm:h-[50vh] md :h-[60vh] object-cover rounded-tl-3xl rounded-tr-3xl' 
           />
           <h1 
             className='absolute text-gray-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 

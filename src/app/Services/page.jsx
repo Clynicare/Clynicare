@@ -6,14 +6,18 @@ import Image from 'next/image';
 import Nav from '@/components/Nav';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Loading from '@/components/Loading';
+import {easeIn, motion} from 'framer-motion'
+import Footer from '@/components/Footer';
 require('dotenv').config();
+
 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
 
 function ServiceCard({ service, onClick }) {
   return (
-    <div 
+    <motion.div 
       className="bg-white rounded-lg shadow-md cursor-pointer transform transition-transform hover:scale-105"
       onClick={() => onClick(service)}
     >
@@ -28,7 +32,7 @@ function ServiceCard({ service, onClick }) {
           <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">{service.service_category}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -39,9 +43,15 @@ function BookingModal({ service, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/api/bookings`, { service_id: service._id, ...formData });
+      const token=localStorage.getItem('token')
+      console.log("this is the token which is in local storage",token)
+      const response = await axios.post(`${API_URL}/api/bookings`, { service_id: service._id, ...formData },{headers:{
+        "Authorization":`Bearer ${token}`,
+        "content-type":"application/json"
+      }});
+      console.log(response)
       alert(response.status === 200 ? 'Booking successful' : 'Booking failed');
-      router.push('/bookings');
+      router.push('/Bookings');
       onClose();
     } catch (error) {
       console.error("Booking Error:", error);
@@ -51,7 +61,7 @@ function BookingModal({ service, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+      <motion.div initial={{opacity:0,y:-10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{ease:'easeInOut' ,duration:0.5}} className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Book {service.service_name}</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700"><X size={24} /></button>
@@ -73,7 +83,7 @@ function BookingModal({ service, onClose }) {
             <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Book Service</button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -81,6 +91,7 @@ function BookingModal({ service, onClose }) {
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
+  
 
   const getQueryParam = (key) => {
     if (typeof window !== 'undefined') {
@@ -112,14 +123,18 @@ export default function ServicesPage() {
             <h1 className="text-3xl font-bold text-gray-900 mt-12">HomeHealth Services</h1>
             <p className="text-gray-600">Professional healthcare services at your home</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services && services.length>0?
+          <motion.div initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:0.8,ease:easeIn}} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <ServiceCard key={service._id} service={service} onClick={setSelectedService} />
             ))}
-          </div>
+          </motion.div>
+          :<Loading/>
+          }
         </main>
       </div>
       {selectedService && <BookingModal service={selectedService} onClose={() => setSelectedService(null)} />}
+        <Footer/>
     </div>
   );
 }
