@@ -8,44 +8,46 @@ const Packagepage = () => {
 
   const packs = [
     {
-      name: 'Basic Package',
+      name: 'Basic Care ',
       price: {
         monthly: 50,
         yearly: 500,
       },
       benefits: [
-        'Basic treatment plan',
-        '1 consultation per month',
-        '1 prescription included',
-        'Email support',
+        'Basic feeding assistance',
+        'Medication reminders',
+        'Light mobility aid & transfers',
+        'Hygiene support (bathing, diaper changes)'
       ],
       featured: false,
     },
     {
-      name: 'Standard Package',
+      name: 'Advanced Care',
       price: {
         monthly: 150,
         yearly: 1500,
       },
       benefits: [
-        'Standard treatment plan',
-        '3 consultations per month',
-        '2 prescriptions included',
-        'Priority support',
+        'Medication administration (oral, topical)',
+        'Wound care & dressing changes',
+        'Compression stocking application',
+        'Catheter & ostomy care',
+        'Pain management assistance'
       ],
       featured: true,
     },
     {
-      name: 'Premium Package',
+      name: 'Total Care',
       price: {
         monthly: 300,
         yearly: 3000,
       },
       benefits: [
-        'Premium treatment plan',
-        'Unlimited consultations',
-        '3 prescriptions included',
-        '24/7 support',
+        'Injection administration (Insulin, B12, Antibiotics, etc.)',
+        'IV Drip setup & monitoring',
+        'Vital sign monitoring (BP, oxygen, heart rate)',
+        'Physical therapy support',
+        'Emergency medical response'
       ],
       featured: false,
     },

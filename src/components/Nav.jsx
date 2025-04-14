@@ -18,7 +18,9 @@ function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
+
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -27,7 +29,7 @@ function Nav() {
       if (token) {
         try {
           const response = await axios.post(
-            "http://localhost:7000/api/token-valid",
+            `${API_BASE_URL}/api/token-valid `,
             {},
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -49,7 +51,7 @@ function Nav() {
   };
 
   return (
-    <section className="fixed w-full bg-transparent text-black py-4 backdrop-blur-md z-50 px-6 md:px-[100px]">
+    <section className="fixed w-full bg-transparent text-black py-4 backdrop-blur-md z-50 px-6 md:px-[100px] z-99">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -69,7 +71,7 @@ function Nav() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-8 font-sans">
           <ul className="flex space-x-8 text-gray-500">
             <li><Link href="/" className="hover:text-[#4DA1A9] transition-colors">Home</Link></li>
             <li><Link href="/Services" className="hover:text-[#4DA1A9] transition-colors">Services</Link></li>
@@ -134,7 +136,7 @@ function Nav() {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-[60px] left-0 w-full bg-white shadow-lg rounded-b-lg py-4 px-6 text-center">
+        <div className="md:hidden z-10 absolute top-[60px] left-0 w-full bg-white shadow-lg rounded-b-lg py-4 px-6 text-center">
           <ul className="flex flex-col space-y-4 text-gray-700">
             <li><Link href="/" className="hover:text-[#4DA1A9] transition-colors">Home</Link></li>
             <li><Link href="/Services" className="hover:text-[#4DA1A9] transition-colors">Services</Link></li>
@@ -164,7 +166,22 @@ function Nav() {
                 </button>
               </motion.div>
             ) : (
-              <p className="text-gray-500">Please log in</p>
+              <div className="flex flex-col gap-2 mt-2 items-center  space-x-4">
+              <Link
+                className="flex items-center px-4 py-2 text-[#4DA1A9] hover:text-[#007BA7] transition-colors"
+                href="/Login"
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                Login
+              </Link>
+              <Link
+                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white rounded-full hover:shadow-lg transition"
+                href="/Signup"
+              >
+                <UserPlus className="w-4 h-4 mr-2" />
+                Sign Up
+              </Link>
+            </div>
             )}
           </div>
         </div>

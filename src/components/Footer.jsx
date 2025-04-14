@@ -1,16 +1,22 @@
 import Link from 'next/link'
 import React from 'react'
+import {Activity} from 'lucide-react'
 import { faApple, faGooglePlay } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Footer() {
   return (
-    <div className='footer w-full px-6 md:px-[100px] py-10 bg-gray-100'>
-      
+    <div className='footer w-full px-6 md:px-[100px] py-10'>
+      <div className='flex  items-center'>
+      <Activity className="w-8 h-8 text-[#4DA1A9] mr-2"/>
+      <Link href='/'>
       {/* Brand Name */}
-      <h1 className="font-rejoice font-bold text-3xl md:text-4xl tracking-normal bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text text-center md:text-left">
+      <h1 className="font-bold text-4xl md:text-5xl tracking-tighter md:tracking-normal bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas">
+
         CLYNICARE
       </h1>
+      </Link>
+      </div>
 
       {/* Main Footer Content */}
       <div className="main flex flex-col md:flex-row justify-between mt-8 space-y-8 md:space-y-0">

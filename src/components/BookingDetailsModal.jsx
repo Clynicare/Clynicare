@@ -3,6 +3,9 @@ import { X } from 'lucide-react';
 
 export function BookingDetailsModal({ booking, isOpen, onClose }) {
   if (!isOpen || !booking) return null;
+console.log("this is the booking",booking)
+const timeString=booking.booking_time
+const [hours, minutes] = timeString.split(":").map(Number);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -20,39 +23,44 @@ export function BookingDetailsModal({ booking, isOpen, onClose }) {
         <div className="p-6 space-y-4">
           <div>
             <h3 className="text-sm font-medium text-gray-500">Patient Information</h3>
-            <p className="mt-1 text-sm text-gray-900">{booking.patientName}</p>
-            <p className="mt-1 text-sm text-gray-900">{booking.patientEmail}</p>
+            <p className="mt-1 text-sm text-gray-900">{booking.user_name}</p>
+            <p className="mt-1 text-sm text-gray-900">{booking.user_id.email}</p>
           </div>
 
           <div>
             <h3 className="text-sm font-medium text-gray-500">Service Details</h3>
-            <p className="mt-1 text-sm text-gray-900">{booking.service}</p>
-            <p className="mt-1 text-sm text-gray-900">Department: {booking.department}</p>
+            <p className="mt-1 text-sm text-gray-900">{booking.service_id.service_name}</p>
+            <p className="mt-1 text-sm text-gray-900">Department: {booking.service_id.service_category}</p>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Doctor</h3>
-            <p className="mt-1 text-sm text-gray-900">{booking.doctorName}</p>
+            <h3 className="text-sm font-medium text-gray-500">Nurse</h3>
+            <p className="mt-1 text-sm text-gray-900">Kareem</p>
           </div>
 
           <div>
             <h3 className="text-sm font-medium text-gray-500">Appointment Time</h3>
             <p className="mt-1 text-sm text-gray-900">
-              {new Date(booking.dateTime).toLocaleString('en-US', {
+              {new Date(booking.booking_date).toLocaleString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
+               
+              })}  
+            &nbsp;
+             { new Date(2000, 0, 1, hours, minutes).toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true // Ensures AM/PM format
+  })}
             </p>
           </div>
 
-          {booking.symptoms && (
+          {booking.service_id.service_description && (
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Symptoms/Notes</h3>
-              <p className="mt-1 text-sm text-gray-900">{booking.symptoms}</p>
+              <h3 className="text-sm font-medium text-gray-500">Service Description</h3>
+              <p className="mt-1 text-sm text-gray-900">{booking.service_id.service_description}</p>
             </div>
           )}
 

@@ -6,7 +6,7 @@ import { Heart, Mail, Lock, User, Phone, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 function Login() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin,   ] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,7 +39,7 @@ function Login() {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="flex items-center justify-center mb-8">
             <Heart className="h-8 w-8 text-[#4DA1A9] mr-2" />
-            <h1 className="text-2xl font-bold text-gray-800">HealthCare Plus</h1>
+            <h1 className=" font-bold text-gray-800 bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas text-4xl tracking-tighter  ">CLYNICARE</h1>
           </div>
 
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-8">
@@ -47,7 +47,7 @@ function Login() {
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {!isLogin && (
+            
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                   <User className="w-4 h-4 mr-2 text-[#4DA1A9]" />
@@ -63,7 +63,6 @@ function Login() {
                   required
                 />
               </div>
-            )}
 
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
@@ -97,7 +96,6 @@ function Login() {
               />
             </div>
 
-            {!isLogin && (
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                   <Phone className="w-4 h-4 mr-2 text-blue-500" />
@@ -113,23 +111,21 @@ function Login() {
                   required
                 />
               </div>
-            )}
 
             <button
               type="submit"
               className="w-full bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] hover:[#007BA7] text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center group"
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <button
-              onClick={() => router.push('/login')}
+              onClick={() => router.push('/Login')}
               className="text-blue-600 hover:text-blue-700 font-medium transition"
             >
-              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+           'Already have an account? Sign in
             </button>
           </div>
         </div>

@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search,MapPin } from "lucide-react";
 import Nav from "./Nav";
 import Searchbox from "./Searchbox";
 
@@ -24,7 +24,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-3xl md:text-5xl font-bold text-black leading-tight"
+            className="text-3xl font-sans md:text-5xl font-bold text-black tracking-tighter "
           >
             Your Health, Our Priority: <br className="hidden md:block" />
             Seamless Home Care at Your Fingertips.
@@ -35,7 +35,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-gray-700 text-lg md:text-xl leading-relaxed"
+            className="text-gray-700 font-sans text-lg md:text-xl leading-relaxed"
           >
             Get skilled home healthcare at your doorstep—easy booking, 
             professional care, and complete well-being.
@@ -52,8 +52,8 @@ export default function Hero() {
               <Searchbox />
             </div>
             <button className="bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
-              <Search className="w-5 h-5" />
-              <span>Search</span>
+             <MapPin className="w-5 h-5"/>
+              <span>Ballari</span>
             </button>
           </motion.div>
 

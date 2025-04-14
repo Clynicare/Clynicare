@@ -31,6 +31,10 @@
   font-weight: 100; /* Regular */
   font-style: normal;
 }
+@font-face {
+  font-family: 'sans';
+  src: url('../fonts//sans.ttf') format('truetype');
+}
 .animate-scroll-left {
   animation: scroll-left 30s linear infinite;
 }

@@ -69,7 +69,7 @@ function Login() {
                                 />
                             </div>
                         ))}
-                        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center group">
+                        <button type="submit" className="w-full bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center group">
                             {loading ? <><Loader className="w-5 h-5 animate-spin mr-2" /> Redirecting...</> : <>Sign In <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" /></>}
                         </button>
                     </form>

@@ -100,13 +100,13 @@ const Doctors = () => {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <span className="mb-4 inline-block rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-gradient-to-b from-[#4DA1A9] to-[#007BA7]">
-            Meet Our Medical Experts
+            Meet Our Supporting Doctors
           </span>
           <h1 className="mb-6 text-3xl font-bold leading-tight text-gray-900 md:text-5xl">
-            World-Class Healthcare Professionals
+            Bellary's Top Class Proffesional Doctors
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            Our team of dedicated doctors brings together decades of experience and expertise
+            Our trusted dedicated doctors sends together decades of experienced Nurses with expertise
             to provide you with the highest quality medical care.
           </p>
         </div>

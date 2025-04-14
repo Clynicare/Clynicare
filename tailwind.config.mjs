@@ -15,7 +15,8 @@ export default {
         
         poppins: ['Poppins'],
         rejoice:['Rejouice-Headline'],
-        bebas:['BebasNeue-Regular']
+        bebas:['BebasNeue-Regular'],
+        sans:['sans']
       },
       colors: {
         background: "var(--background)",

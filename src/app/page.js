@@ -29,7 +29,7 @@ export default function Home() {
   },[])
   return (
     
-   <div>
+   <div className="font-sans">
     {loading ? 
   <Loading/> : (<><Hero></Hero>
     <AnimatedSection>

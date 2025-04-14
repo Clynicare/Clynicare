@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
+import Image from 'next/image'
 import React from 'react'
 
 export default function Page() {
@@ -60,7 +61,7 @@ export default function Page() {
                 ))}
               </div>
               <div className='w-full md:w-1/2'>
-                <img src={section.image} alt={section.title} className='w-full h-auto rounded-xl' />
+                <Image src={section.image} width={400} priority height={400} alt={section.title} className='w-full h-auto rounded-xl' />
               </div>
             </div>
           ))}

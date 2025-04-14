@@ -6,70 +6,79 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/";
 
 function App() {
-  const [mockBookings,setmockbookings] =useState([])
+  const [mockBookings, setMockBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-try {
-  const forthe=async()=>{
-    const token=localStorage.getItem("token")
-    console.log(token)
-    const bookingdetails=await axios.get("http://localhost:7000/Bookings",{
-      headers:{
-        Authorization:`Bearer ${token}`
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.log("thereis no token")
+          
+          return ;
+        }
+
+        const response = await axios.get(`http://localhost:7000/Bookings`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log("Booking details: ", response.data);
+        setMockBookings(response.data);
+      } catch (error) {
+        console.error("Error fetching bookings: ", error);
       }
-    })
-    console.log("this is the booking details",bookingdetails)
-    setmockbookings(bookingdetails.data)
-  }
-  forthe()
-} catch (error) {
-  
-}
+    };
 
+    fetchBookings();
+  }, []);
 
+  const handleBookingClick = (booking) => {
+    setSelectedBooking(booking);
+    setIsModalOpen(true);
+  };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedBooking(null);
+  };
 
-
-const handleBookingClick = (booking) => {
-  setSelectedBooking(booking);
-  setIsModalOpen(true);
-};
-
-const handleCloseModal = () => {
-  setIsModalOpen(false);
-  setSelectedBooking(null);
-};
-
-console.log("this is the mockbooking",mockBookings.data)
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm ">
-        <Nav></Nav>
+      <header className="bg-white shadow-sm">
+        <Nav />
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div key="some" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {mockBookings.map((booking) => (
-            <BookingCard
-              key={booking.id}
-              booking={booking}
-              onClick={() => handleBookingClick(booking)}
-            />
-          ))}
+        <div key={1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+          {Array.isArray(mockBookings) && mockBookings.length>0 ?(
+            mockBookings.map((booking) => (
+              <BookingCard
+                key={booking.id}
+                booking={booking}
+                onClick={() => handleBookingClick(booking)}
+              />
+            ))
+          ):(
+            <div className='h-[50vh] w-[180vh] '>
+              <h1 className='text-center mt-10 text-black/50 '>No bookings Found Or Kindly Login</h1>
+            </div>
+          )}
         </div>
       </main>
 
-      {/* Booking Details Modal */}
       <BookingDetailsModal
         booking={selectedBooking}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

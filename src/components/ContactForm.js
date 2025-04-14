@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { Mail, Phone, User, Heart, Clock, CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -69,7 +70,7 @@ export default function ContactForm() {
               >
                 {/* Front Side */}
                 <div className="absolute w-full h-full backface-hidden" style={{ backfaceVisibility: "hidden" }}>
-                  <img src="/images/contactusimage.jpg" alt="Office" className="w-full h-full object-cover rounded-lg" />
+                  <Image src="/images/contactusimage.jpg" alt="Office" width={300} height={600} className="w-full h-full object-cover rounded-lg" />
                   <div className="absolute inset-0 flex flex-col justify-center p-6 bg-black/30 rounded-lg">
                     <h2 className="text-2xl font-bold text-white">Get in Touch</h2>
                     <p className="text-white opacity-90">We're here to help and answer any questions.</p>
