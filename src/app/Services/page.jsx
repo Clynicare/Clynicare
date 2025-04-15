@@ -58,7 +58,7 @@ function BookingModal({ service, onClose }) {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://localhost:7000/api/bookings`,
+        `${API_BASE_URL}/api/bookings`,
         { service_id: service._id, ...formData },
         {
           headers: {
@@ -187,7 +187,7 @@ export default function ServicesPage() {
   const fetchServices = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7000/Services${serviceName ? `?name=${serviceName}` : ''}`
+        `${API_BASE_URL}/Services${serviceName ? `?name=${serviceName}` : ''}`
       );
       setServices(response.data);
     } catch (error) {

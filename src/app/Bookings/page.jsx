@@ -23,7 +23,7 @@ function App() {
           return ;
         }
 
-        const response = await axios.get(`http://localhost:7000/Bookings`, {
+        const response = await axios.get(`${API_BASE_URL}/Bookings`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
