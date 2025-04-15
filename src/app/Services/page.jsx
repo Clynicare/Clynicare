@@ -56,6 +56,7 @@ function BookingModal({ service, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(process.env.NEXT_PUBLIC_API_URL)
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `${API_BASE_URL}/api/bookings`,
