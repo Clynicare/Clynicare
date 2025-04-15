@@ -13,11 +13,12 @@ function Login() {
     password: '',
     phone: ''
   });
+  const API_BASE_URL=process.env.NEXT_PUBLIC_API_URL
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response =await axios.post('http://localhost:7000/api/user',formData)
+    const response =await axios.post(`${API_BASE_URL}/api/user`,formData)
     if(response.status ===200){
       alert("the user has been successfully created",formData.name)
       router.push('/Login')

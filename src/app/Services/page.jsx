@@ -11,7 +11,7 @@ import { easeIn, motion } from 'framer-motion';
 import Footer from '@/components/Footer';
 require('dotenv').config();
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
 
 function ServiceCard({ service, onClick }) {
   return (

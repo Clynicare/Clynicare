@@ -6,7 +6,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
 
 function App() {
   const [mockBookings, setMockBookings] = useState([]);

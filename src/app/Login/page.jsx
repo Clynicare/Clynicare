@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 require('dotenv').config();
 
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
