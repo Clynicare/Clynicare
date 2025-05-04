@@ -31,7 +31,7 @@ function ServiceCard({ service, onClick }) {
         <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.service_name}</h3>
         <p className="text-gray-600 text-sm mb-4 line-clamp-2">{service.service_description}</p>
         <div className="flex justify-between items-center">
-          <span className="text-blue-600 font-semibold text-lg">${service.service_price}/hour</span>
+          <span className="text-blue-600 font-semibold text-lg">₹{service.service_price}/hour</span>
           <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
             {service.service_category}
           </span>
@@ -43,7 +43,7 @@ function ServiceCard({ service, onClick }) {
 
 function BookingModal({ service, onClose }) {
   const [formData, setFormData] = useState({
-    user_name: '',
+    patient_name: '',
     mobile_no: '',
     booking_date: '',
     booking_time: '',
@@ -68,12 +68,21 @@ function BookingModal({ service, onClose }) {
           },
         }
       );
+     
       alert(response.status === 200 ? 'Booking successful' : 'Booking failed');
       router.push('/Bookings');
       onClose();
     } catch (error) {
+    
+
       console.error('Booking Error:', error);
-      alert('Error processing booking. Try again later.');
+      if(error.status===403){
+        alert('Make Sure You are Logged in ')
+        router.push('/Signup')
+      }else{
+        alert('Please Enter the details Correctly')
+      }
+      
     }
   };
 
@@ -101,73 +110,78 @@ function BookingModal({ service, onClose }) {
             'This service helps with daily tasks to ensure comfort and safety.'}
         </p>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
-          {['user_name', 'mobile_no', 'booking_date', 'booking_time', 'address', 'gender'].map(
-            (field, index) => (
-              <div key={index} className={`relative ${field === 'address' ? 'col-span-2' : ''}`}>
-                {field === 'gender' ? (
-                  <div className="relative w-full">
-                    <select
-                      required
-                      value={formData[field]}
-                      className="w-full p-3 border border-gray-300 rounded-xl bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer shadow-sm"
-                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                    >
-                      <option value="" disabled className="text-gray-400">
-                        Select Gender
-                      </option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Prefer Not To Say">Prefer Not To Say</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                      ▼
-                    </div>
-                  </div>
-                ) : (
-                  <input
-                    type={
-                      field.includes('date')
-                        ? 'date'
-                        : field.includes('time')
-                        ? 'time'
-                        : 'text'
-                    }
-                    placeholder={field.replace('_', ' ').toUpperCase()}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                    value={formData[field]}
-                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                  />
-                )}
-              </div>
-            )
-          )}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 sm:px-4 lg:px-6 ">
+  {['patient_name', 'mobile_no', 'booking_date', 'booking_time', 'address', 'gender'].map(
+    (field, index) => (
+      <div key={index} className={`w-full ${field === 'address' ? 'sm:col-span-2' : ''}`}>
+        <label className="block mb-1 text-sm font-medium text-gray-700">
+          {field.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase())}
+        </label>
 
-          <textarea
-            placeholder="Any additional requirements?"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-            rows="3"
-            value={formData.additional_requirements}
-            onChange={(e) => setFormData({ ...formData, additional_requirements: e.target.value })}
-          ></textarea>
-
-          <div className="flex justify-between items-center mt-6">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-5 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
+        {field === 'gender' ? (
+          <div className="relative">
+            <select
+              required
+              value={formData[field]}
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl bg-white text-gray-700 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer shadow-sm"
+              onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-all"
-            >
-              Book Now
-            </button>
+              <option value="" disabled className="text-gray-400">
+                Select Gender
+              </option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Prefer Not To Say">Prefer Not To Say</option>
+            </select>
+            <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-sm">▼</div>
           </div>
-        </form>
+        ) : (
+          <input
+            type={
+              field.includes('date')
+                ? 'date'
+                : field.includes('time')
+                ? 'time'
+                : 'text'
+            }
+            required
+            className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            value={formData[field]}
+            onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+          />
+        )}
+      </div>
+    )
+  )}
+
+  <div className="sm:col-span-2">
+    <label className="block mb-1 text-sm font-medium text-gray-700">Additional Requirements</label>
+    <textarea
+      placeholder="Any additional requirements?"
+      className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+      rows="3"
+      value={formData.additional_requirements}
+      onChange={(e) => setFormData({ ...formData, additional_requirements: e.target.value })}
+    ></textarea>
+  </div>
+
+  <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 sm:gap-0 sm:col-span-2 mt-4">
+    <button
+      type="button"
+      onClick={onClose}
+      className="w-full sm:w-auto px-5 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-all"
+    >
+      Book Now
+    </button>
+  </div>
+</form>
+
       </motion.div>
     </div>
   );

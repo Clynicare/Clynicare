@@ -18,18 +18,16 @@ function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Set initial loading to true
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
-
 
   useEffect(() => {
     const handleLogin = async () => {
       const token = localStorage.getItem("token");
-
       if (token) {
         try {
           const response = await axios.post(
-            `${API_BASE_URL}/api/token-valid `,
+            `${API_BASE_URL}/api/token-valid`,
             {},
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -39,11 +37,11 @@ function Nav() {
           setUserinfo(null);
         }
       }
-      setLoading(false); // Ensure loading is false after fetching
+      setLoading(false);
     };
 
     handleLogin();
-  }, []);
+  }, []); // Only run once on mount
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -51,13 +49,13 @@ function Nav() {
   };
 
   return (
-    <section className="fixed w-full bg-transparent text-black py-4 backdrop-blur-md z-50 px-6 md:px-[100px] z-99">
+    <section className="fixed w-full bg-transparent text-black py-4 backdrop-blur-md z-50 px-6 md:px-[100px]">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <Activity className="w-8 h-8 text-[#4DA1A9] mr-2" />
+          <Activity className="w-8 h-8 text-[#4FC3F7] mr-2" />
           <Link href="/">
-            <h1 className="font-bold text-4xl md:text-5xl tracking-tighter md:tracking-normal bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas">
+            <h1 className="font-bold text-4xl md:text-5xl bg-gradient-to-b from-[#4FC3F7] to-[#0288D1] text-transparent bg-clip-text font-bebas">
               CLYNICARE
             </h1>
           </Link>
@@ -73,23 +71,24 @@ function Nav() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8 font-sans">
           <ul className="flex space-x-8 text-gray-500">
-            <li><Link href="/" className="hover:text-[#4DA1A9] transition-colors">Home</Link></li>
-            <li><Link href="/Services" className="hover:text-[#4DA1A9] transition-colors">Services</Link></li>
-            <li><Link href="/Bookings" className="hover:text-[#4DA1A9] transition-colors">Bookings</Link></li>
-            <li><Link href="/About" className="hover:text-[#4DA1A9] transition-colors">About Us</Link></li>
-            <li><Link href="/Contact" className="hover:text-[#4DA1A9] transition-colors">Contact Us</Link></li>
+            <li><Link href="/" className="hover:text-[#4DA1A9]">Home</Link></li>
+            <li><Link href="/Services" className="hover:text-[#4DA1A9]">Services</Link></li>
+            <li><Link href="/Bookings" className="hover:text-[#4DA1A9]">Bookings</Link></li>
+            <li><Link href="/About" className="hover:text-[#4DA1A9]">About Us</Link></li>
+            <li><Link href="/Contact" className="hover:text-[#4DA1A9]">Contact Us</Link></li>
           </ul>
 
           {/* Auth Buttons */}
+          
           {loading ? (
-            <p className="text-gray-500">Loading...</p> // Display loading until authentication is determined
+            <p className="text-gray-500 w-[200px] pl-10">Loading...</p>
           ) : userinfo ? (
             <div
-              className="relative cursor-pointer"
+              className="relative cursor-pointer w-[200px]"
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              <div className="flex items-center gap-2 text-[#4DA1A9] hover:text-[#007BA7] transition-colors">
+              <div className="flex items-center gap-2 text-[#4DA1A9] hover:text-[#007BA7]">
                 <CircleUserRound />
                 <p className="font-rejoice">Welcome, {userinfo.name}!</p>
               </div>
@@ -98,14 +97,14 @@ function Nav() {
                   <p className="text-gray-600 font-semibold">{userinfo.email}</p>
                   <Link
                     href="/profile"
-                    className="flex items-center mt-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition"
+                    className="flex items-center mt-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
                   >
                     <User className="w-4 h-4 mr-2" />
                     Profile
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center mt-2 px-4 py-2 w-full text-red-600 hover:bg-gray-100 rounded-md transition"
+                    className="flex items-center mt-2 px-4 py-2 w-full text-red-600 hover:bg-gray-100 rounded-md"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
@@ -116,15 +115,15 @@ function Nav() {
           ) : (
             <div className="flex items-center space-x-4">
               <Link
-                className="flex items-center px-4 py-2 text-[#4DA1A9] hover:text-[#007BA7] transition-colors"
                 href="/Login"
+                className="flex items-center px-4 py-2 text-[#4DA1A9] hover:text-[#007BA7]"
               >
                 <LogIn className="w-4 h-4 mr-2" />
                 Login
               </Link>
               <Link
-                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white rounded-full hover:shadow-lg transition"
                 href="/Signup"
+                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4FC3F7] to-[#0288D1] text-white rounded-full hover:shadow-lg"
               >
                 <UserPlus className="w-4 h-4 mr-2" />
                 Sign Up
@@ -134,15 +133,15 @@ function Nav() {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden z-10 absolute top-[60px] left-0 w-full bg-white shadow-lg rounded-b-lg py-4 px-6 text-center">
+        <div className="md:hidden absolute top-[60px] left-0 w-full bg-white shadow-lg rounded-b-lg py-4 px-6 text-center">
           <ul className="flex flex-col space-y-4 text-gray-700">
-            <li><Link href="/" className="hover:text-[#4DA1A9] transition-colors">Home</Link></li>
-            <li><Link href="/Services" className="hover:text-[#4DA1A9] transition-colors">Services</Link></li>
-            <li><Link href="/Bookings" className="hover:text-[#4DA1A9] transition-colors">Bookings</Link></li>
-            <li><Link href="/About" className="hover:text-[#4DA1A9] transition-colors">About Us</Link></li>
-            <li><Link href="/Contact" className="hover:text-[#4DA1A9] transition-colors">Contact Us</Link></li>
+            <li><Link href="/" className="hover:text-[#4DA1A9]">Home</Link></li>
+            <li><Link href="/Services" className="hover:text-[#4DA1A9]">Services</Link></li>
+            <li><Link href="/Bookings" className="hover:text-[#4DA1A9]">Bookings</Link></li>
+            <li><Link href="/About" className="hover:text-[#4DA1A9]">About Us</Link></li>
+            <li><Link href="/Contact" className="hover:text-[#4DA1A9]">Contact Us</Link></li>
           </ul>
 
           {/* Mobile Auth Buttons */}
@@ -153,35 +152,34 @@ function Nav() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: easeIn } }}
-                exit={{ opacity: 0, y: -10, transition: { duration: 0.3, ease: "easeOut" } }}
                 className="flex flex-col items-center"
               >
                 <p className="text-gray-700 font-semibold">{userinfo.name}</p>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-gray-100 rounded-md transition mt-2"
+                  className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-gray-100 rounded-md mt-2"
                 >
                   <LogOut className="w-4 h-4 mr-2" />
                   Logout
                 </button>
               </motion.div>
             ) : (
-              <div className="flex flex-col gap-2 mt-2 items-center  space-x-4">
-              <Link
-                className="flex items-center px-4 py-2 text-[#4DA1A9] hover:text-[#007BA7] transition-colors"
-                href="/Login"
-              >
-                <LogIn className="w-4 h-4 mr-2" />
-                Login
-              </Link>
-              <Link
-                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white rounded-full hover:shadow-lg transition"
-                href="/Signup"
-              >
-                <UserPlus className="w-4 h-4 mr-2" />
-                Sign Up
-              </Link>
-            </div>
+              <div className="flex flex-col gap-2 mt-2 items-center">
+                <Link
+                  href="/Login"
+                  className="flex items-center px-4 py-2 text-[#4DA1A9] hover:text-[#007BA7]"
+                >
+                  <LogIn className="w-4 h-4 mr-2" />
+                  Login
+                </Link>
+                <Link
+                  href="/Signup"
+                  className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white rounded-full hover:shadow-lg"
+                >
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Sign Up
+                </Link>
+              </div>
             )}
           </div>
         </div>

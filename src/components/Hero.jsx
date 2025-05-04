@@ -11,8 +11,7 @@ export default function Hero() {
     <section className="bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] min-h-screen overflow-hidden relative flex flex-col">
       
       {/* Navbar */}
-      <Nav />
-
+      
       {/* Main Hero Section */}
       <div className="flex flex-col md:flex-row items-center justify-between pt-[100px] md:pt-0 px-6 md:px-16 lg:px-24 w-full max-w-[1400px] mx-auto mt-10 md:mt-20">
         
@@ -51,7 +50,7 @@ export default function Hero() {
             <div className="flex-1">
               <Searchbox />
             </div>
-            <button className="bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
+            <button className="bg-gradient-to-r from-[#4FC3F7] to-[#0288D1]  text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
              <MapPin className="w-5 h-5"/>
               <span>Ballari</span>
             </button>

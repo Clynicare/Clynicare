@@ -5,6 +5,7 @@ import { BookingDetailsModal } from '../../components/BookingDetailsModal';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import axios from 'axios';
+import Loading from '@/components/Loading';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
 
@@ -57,19 +58,28 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div key={1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {Array.isArray(mockBookings) && mockBookings.length>0 ?(
-            mockBookings.map((booking) => (
-              <BookingCard
-                key={booking.id}
-                booking={booking}
-                onClick={() => handleBookingClick(booking)}
-              />
-            ))
-          ):(
-            <div className='h-[50vh] w-[180vh] '>
-              <h1 className='text-center mt-10 text-black/50 '>No bookings Found Or Kindly Login</h1>
-            </div>
-          )}
+        {
+  Array.isArray(mockBookings) ? (
+    mockBookings && mockBookings.length > 0 ? (
+      mockBookings.map((booking) => (
+        <BookingCard
+          key={booking.id}
+          booking={booking}
+          onClick={() => handleBookingClick(booking)}
+        />
+      ))
+    ) : (
+      <div className='h-[50vh] w-[180vh]'>
+        <h1 className='text-center mt-10 text-black/50'>
+          No bookings Found Or Kindly Login
+        </h1>
+      </div>
+    )
+  ) : (
+    <Loading />
+  )
+}
+
         </div>
       </main>
 

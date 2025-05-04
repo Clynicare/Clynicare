@@ -19,17 +19,18 @@ import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
 import AnimatedSection from "@/components/Animated_section";
 export default function Home() {
-  const [loading,setloading]=useState(false)
+  const [loading,setloading]=useState(true)
   useEffect(()=>{
    const timer=setTimeout(() => {
       setloading(false)
-   }, 2000);
+   }, 3000);
 
    return ()=> clearTimeout(timer)
-  },[])
+  },[2000])
   return (
     
    <div className="font-sans">
+    <Nav/>
     {loading ? 
   <Loading/> : (<><Hero></Hero>
     <AnimatedSection>

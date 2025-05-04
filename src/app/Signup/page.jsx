@@ -39,8 +39,7 @@ function Login() {
       <div className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="flex items-center justify-center mb-8">
-            <Heart className="h-8 w-8 text-[#4DA1A9] mr-2" />
-            <h1 className=" font-bold text-gray-800 bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas text-4xl tracking-tighter  ">CLYNICARE</h1>
+            <h1 className=" font-bold text-gray-800 bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas text-6xl   ">CLYNICARE</h1>
           </div>
 
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-8">
