@@ -53,9 +53,9 @@ function Nav() {
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <Activity className="w-8 h-8 text-[#4FC3F7] mr-2" />
+          <Activity className="w-8 h-8 text-[#4DA1A9]  mr-2" />
           <Link href="/">
-            <h1 className="font-bold text-4xl md:text-5xl bg-gradient-to-b from-[#4FC3F7] to-[#0288D1] text-transparent bg-clip-text font-bebas">
+            <h1 className="font-bold text-4xl md:text-5xl bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-transparent bg-clip-text font-bebas">
               CLYNICARE
             </h1>
           </Link>
@@ -123,7 +123,7 @@ function Nav() {
               </Link>
               <Link
                 href="/Signup"
-                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4FC3F7] to-[#0288D1] text-white rounded-full hover:shadow-lg"
+                className="flex items-center px-4 py-2 bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white rounded-full hover:shadow-lg"
               >
                 <UserPlus className="w-4 h-4 mr-2" />
                 Sign Up

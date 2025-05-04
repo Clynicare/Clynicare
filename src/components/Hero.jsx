@@ -50,7 +50,7 @@ export default function Hero() {
             <div className="flex-1">
               <Searchbox />
             </div>
-            <button className="bg-gradient-to-r from-[#4FC3F7] to-[#0288D1]  text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
+            <button className="bg-gradient-to-r from-[#4DA1A9] to-[#007BA7]  text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
              <MapPin className="w-5 h-5"/>
               <span>Ballari</span>
             </button>
