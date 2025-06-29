@@ -51,7 +51,7 @@ const Hero = React.memo(() => {
               <Searchbox />
             </div>
             <button className="bg-gradient-to-r from-[#4FC3F7] to-[#0288D1]  text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
-              <MapPin className="w-5 h-5"/>
+             <MapPin className="w-5 h-5"/>
               <span>Ballari</span>
             </button>
           </motion.div>
