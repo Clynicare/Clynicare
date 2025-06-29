@@ -16,14 +16,17 @@
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
+    "express-rate-limit": "^7.5.1",
     "framer-motion": "^12.5.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.474.0",
     "motion": "^12.5.0",
     "next": "^15.1.4",
+    "node-cache": "^5.1.2",
     "nodemailer": "^6.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "resize-observer-polyfill": "^1.5.1",
     "sonner": "^1.7.4"
   },
   "devDependencies": {

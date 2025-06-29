@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 
 const images = [
@@ -20,7 +20,8 @@ const images = [
   "/images/EmergencyCare.jpg",
 ];
 
-const Fourthinverse = () => {
+// Memoize the component to avoid unnecessary re-renders
+const Fourthinverse = React.memo(() => {
   return (
     <div className="bg-transparent h-[30vh] overflow-hidden mt-10 relative">
       <motion.div
@@ -31,12 +32,14 @@ const Fourthinverse = () => {
       >
         {images.map((src, index) => (
           <div key={index} className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
+            {/* Image with lazy loading */}
             <Image
               src={src}
               width={256}
               height={256}
               alt={`Image ${index + 1}`}
               className="w-full h-full object-cover rounded-lg"
+              loading="lazy" // Optimized for performance
               unoptimized
             />
           </div>
@@ -44,7 +47,6 @@ const Fourthinverse = () => {
       </motion.div>
     </div>
   );
-};
+});
 
 export default Fourthinverse;
-

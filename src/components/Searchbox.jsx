@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 const services = [
@@ -21,28 +22,30 @@ const services = [
   "Hormone Therapy Injections",
 ];
 
-const ServiceSearch = () => {
+const ServiceSearch = React.memo(() => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const router = useRouter();
 
+  // Use useCallback for debounced search function to prevent unnecessary re-creations
+  const handleSearch = useCallback(() => {
+    if (query.trim() === "") {
+      setSuggestions([]);
+      return;
+    }
+
+    const filteredServices = services.filter((service) =>
+      service.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setSuggestions(filteredServices);
+  }, [query]); // Only re-run when query changes
+
   // Debounced function to handle search
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (query.trim() === "") {
-        setSuggestions([]);
-        return;
-      }
-
-      const filteredServices = services.filter((service) =>
-        service.toLowerCase().includes(query.toLowerCase())
-      );
-
-      setSuggestions(filteredServices);
-    }, 300); // 300ms debounce
-
-    return () => clearTimeout(delay); // Cleanup function to prevent excessive calls
-  }, [query]); // Runs only when `query` changes
+    const delay = setTimeout(handleSearch, 300); // 300ms debounce
+    return () => clearTimeout(delay); // Cleanup function
+  }, [handleSearch]);
 
   const handleServiceClick = (serviceName) => {
     router.push(`/Services?name=${encodeURIComponent(serviceName)}`);
@@ -76,6 +79,6 @@ const ServiceSearch = () => {
       )}
     </div>
   );
-};
+});
 
 export default ServiceSearch;

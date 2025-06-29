@@ -1,31 +1,51 @@
+"use client";
+
 import Image from 'next/image'
 import React from 'react'
 
 const Content = () => {
   return (
-    <div className='flex justify-between '>
-        <div className="maincontent relative  ml-[200px] top-[200px] w-[600px] flex flex-col gap-5 font-rejoice">
-            <div className="heading     text-black">
-            <span className='font-bold text-5xl leading-[50px]'>Expert Care Made <br /> Easy: Book Trusted Professionals Anytime, Anywhere</span>
+    <div className="flex flex-col md:flex-row justify-between w-full py-10 px-6 lg:px-16">
+      
+      {/* Left Section (Text and Input) */}
+      <div className="maincontent relative flex flex-col gap-5 font-rejoice text-center md:text-left">
+        <div className="heading text-black">
+          <span className="font-bold text-3xl md:text-5xl leading-tight">
+            Expert Care Made <br className="hidden md:block" /> Easy: Book Trusted Professionals Anytime, Anywhere
+          </span>
+        </div>
+        <div>
+          <p className="text-gray-600 text-base md:text-lg">
+            Seamless healthcare at your doorstep—skilled care, <br /> easy booking, and your well-being prioritized.
+          </p>
+        </div>
+        
+        {/* Input and Button */}
+        <div className="flex justify-center md:justify-start bg-white rounded-full p-3 mt-5 md:w-[400px] w-full">
+          <input
+            type="text"
+            className="border-none focus:outline-none px-4 w-full"
+            placeholder="Enter your Email Here"
+          />
+          <button className="bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white p-3 rounded-full w-full md:w-[200px] mt-3 md:mt-0">
+            Book Now
+          </button>
+        </div>
+      </div>
 
-            </div>
-            <div>
-                <p className='text-gray-600'>Seamless healthcare at your doorstep—skilled care,<br /> easy booking, and your well-being prioritized.</p>
-            </div>
-            <div className='flex bg-white w-[400px] gap-[20px] rounded-full p-3  ' >
-                
-                <input type="text" className='border-none  focus:outline-none ml-3'  placeholder='Enter your Email Here'/>
-                    <button className='bg-gradient-to-r from-[#4DA1A9] to-[#007BA7] text-white p-3 rounded-full w-[200px] '>Book now</button>
-               
-            </div>
-            </div>
-            
-            <div className="landingImage">
-            <img src='/images/Land.png' width={900} height={900} className='mt-[100px] '></img>
-                </div>
+      {/* Right Section (Image) */}
+      <div className="landingImage mt-10 md:mt-0">
+        <Image
+          src="/images/Land.png"
+          alt="Healthcare"
+          width={900}
+          height={900}
+          className="object-contain mx-auto"
+        />
+      </div>
 
     </div>
   )
 }
 
-export default Content
+export default Content;

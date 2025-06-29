@@ -1,45 +1,44 @@
-'use client'
-import Footer from '@/components/Footer'
-import Loading from '@/components/Loading'
-import Nav from '@/components/Nav'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+"use client";
+import React, { useEffect, useState } from 'react';
+import Footer from '@/components/Footer';
+import Loading from '@/components/Loading';
+import Nav from '@/components/Nav';
+import Image from 'next/image';
 
 export default function Page() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   // Simulating data load delay (remove in production)
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
       <Nav />
       {loading ? (
         <Loading />
       ) : (
         <>
-          <div className='aboutUS min-h-screen w-full'>
-            <div className='relative'>
-              <Image 
-                src='/images/abouttwo.jpg' 
-                alt='About' 
+          <div className="aboutUS min-h-screen w-full">
+            <div className="relative">
+              <Image
+                src="/images/abouttwo.jpg"
+                alt="About"
                 priority
                 width={600}
                 height={400}
-                className='w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover rounded-tl-3xl rounded-tr-3xl' 
+                className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] object-cover rounded-tl-3xl rounded-tr-3xl"
               />
-              <h1 
-                className='absolute text-gray-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                z-10 font-rejoice text-3xl sm:text-4xl md:text-6xl text-center'
+              <h1
+                className="absolute text-gray-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 font-rejoice text-3xl sm:text-4xl md:text-6xl text-center"
               >
                 About Us
               </h1>
             </div>
 
-            <div className='aboutContent flex flex-col gap-12 px-4 sm:px-6 md:px-[100px] py-10'>
+            <div className="aboutContent flex flex-col gap-12 px-4 sm:px-6 md:px-[100px] py-10">
               {[{
                 title: 'Our Mission',
                 text: [
@@ -68,18 +67,25 @@ export default function Page() {
                 image: '/images/fourthTwo.jpg',
                 reverse: false
               }].map((section, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${section.reverse ? 'md:flex-row-reverse' : ''}`}
                 >
-                  <div className='w-full md:w-1/2 flex flex-col gap-4'>
-                    <h1 className='text-2xl sm:text-3xl md:text-4xl font-semibold'>{section.title}</h1>
+                  <div className="w-full md:w-1/2 flex flex-col gap-4">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold">{section.title}</h1>
                     {section.text.map((paragraph, i) => (
-                      <p key={i} className='text-gray-600'>{paragraph}</p>
+                      <p key={i} className="text-gray-600">{paragraph}</p>
                     ))}
                   </div>
-                  <div className='w-full md:w-1/2'>
-                    <Image src={section.image} width={400} priority height={400} alt={section.title} className='w-full h-auto rounded-xl' />
+                  <div className="w-full md:w-1/2">
+                    <Image
+                      src={section.image}
+                      width={400}
+                      height={400}
+                      priority
+                      alt={section.title}
+                      className="w-full h-auto rounded-xl"
+                    />
                   </div>
                 </div>
               ))}
@@ -89,5 +95,5 @@ export default function Page() {
         </>
       )}
     </div>
-  )
+  );
 }

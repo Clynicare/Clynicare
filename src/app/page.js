@@ -1,58 +1,63 @@
-
 "use client";
-import Image from "next/image";
-import Nav from '../components/Nav'
-import Hero from "@/components/Hero";
-import SecondPage from "@/components/SecondPage";
-import './fontawesome';
-import Thirdpage from "@/components/Thirdpage";
-import Fourthpage from "@/components/Fourthpage";
-import  FifthContent  from "@/components/FifthContent";
-import Doctors from "@/components/Doctors";
-import Fourthinverse from "@/components/Forthinverse";
-import Packagepage from "@/components/Packagepage";
-import Footer from "@/components/Footer";
-
-// import Page from '@/app/Services/Page'
-import ContactForm from "@/components/ContactForm";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Nav from "../components/Nav";
 import Loading from "@/components/Loading";
-import AnimatedSection from "@/components/Animated_section";
+
+// Dynamically import components to improve loading times
+const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+const SecondPage = dynamic(() => import("@/components/SecondPage"), { ssr: false });
+const AnimatedSection = dynamic(() => import("@/components/Animated_section"), { ssr: false });
+const Fourthpage = dynamic(() => import("@/components/Fourthpage"), { ssr: false });
+const Doctors = dynamic(() => import("@/components/Doctors"), { ssr: false });
+const Packagepage = dynamic(() => import("@/components/Packagepage"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+
 export default function Home() {
-  const [loading,setloading]=useState(true)
-  useEffect(()=>{
-   const timer=setTimeout(() => {
-      setloading(false)
-   }, 3000);
+  const [loading, setLoading] = useState(true);
 
-   return ()=> clearTimeout(timer)
-  },[2000])
+  // Set loading state for 3 seconds, after which components will be shown
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);  // Set loading duration to 3 seconds
+    return () => clearTimeout(timer);  // Clean up timer when component unmounts
+  }, []);
+
   return (
-    
-   <div className="font-sans">
-    <Nav/>
-    {loading ? 
-  <Loading/> : (<><Hero></Hero>
-    <AnimatedSection>
-    <SecondPage></SecondPage>
-    </AnimatedSection>
-    <AnimatedSection>
-    <Fourthpage></Fourthpage>
-    </AnimatedSection>
-    <AnimatedSection>
-    <Doctors></Doctors>
-    </AnimatedSection>
-    <AnimatedSection>
-    <Packagepage></Packagepage>
-    </AnimatedSection>
-    <AnimatedSection>
+    <div className="font-sans">
+      
+      <Nav />
 
-    </AnimatedSection>
-    <Footer></Footer></> )
-    
-  }
-   </div>
-  
-   
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+        
+          {/* Hero section */}
+          <Hero />
+
+          {/* Lazy load other sections with animation */}
+          <AnimatedSection>
+            <SecondPage />
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <Fourthpage />
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <Doctors />
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <Packagepage />
+          </AnimatedSection>
+
+          {/* Footer section */}
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }

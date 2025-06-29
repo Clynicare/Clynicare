@@ -1,23 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { Mail, Phone, User, Heart, Clock, CheckCircle } from "lucide-react";
 import Image from "next/image";
 
+// Reducer function for handling form state
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_FORM_DATA":
+      return { ...state, [action.field]: action.value };
+    case "RESET_FORM":
+      return { name: "", phoneNumber: "", email: "", description: "" };
+    default:
+      return state;
+  }
+};
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, dispatch] = useReducer(formReducer, {
     name: "",
     phoneNumber: "",
     email: "",
     description: "",
   });
-
   const [isFlipped, setIsFlipped] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [status, setStatus] = useState(""); // Track form status
 
+  // Check if the user is on a mobile device
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
@@ -25,25 +37,31 @@ export default function ContactForm() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Handle form input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    dispatch({ type: "SET_FORM_DATA", field: e.target.name, value: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Sending..."); // Show sending message
+    setStatus("Sending...");
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      setStatus("Message sent successfully!"); // Show success message
-      setFormData({ name: "", phoneNumber: "", email: "", description: "" });
-    } else {
-      setStatus("Failed to send message."); // Show error message
+      if (response.ok) {
+        setStatus("Message sent successfully!");
+        dispatch({ type: "RESET_FORM" });
+      } else {
+        setStatus("Failed to send message.");
+      }
+    } catch (error) {
+      setStatus("Failed to send message.");
     }
   };
 
@@ -53,7 +71,6 @@ export default function ContactForm() {
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mt-[70px]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            
             {/* Left side - Flippable Image */}
             <div
               className="relative w-full h-[400px] lg:h-[500px] perspective"
@@ -70,7 +87,14 @@ export default function ContactForm() {
               >
                 {/* Front Side */}
                 <div className="absolute w-full h-full backface-hidden" style={{ backfaceVisibility: "hidden" }}>
-                  <Image src="/images/contactusimage.jpg" alt="Office" width={300} height={600} priority className="w-full h-full object-cover rounded-lg" />
+                  <Image
+                    src="/images/contactusimage.jpg"
+                    alt="Office"
+                    width={300}
+                    height={600}
+                    priority
+                    className="w-full h-full object-cover rounded-lg"
+                  />
                   <div className="absolute inset-0 flex flex-col justify-center p-6 bg-black/30 rounded-lg">
                     <h2 className="text-2xl font-bold text-white">Get in Touch</h2>
                     <p className="text-white opacity-90">We're here to help and answer any questions.</p>
@@ -111,7 +135,6 @@ export default function ContactForm() {
             <div className="p-12">
               <h2 className="text-3xl font-semibold text-gray-900 mb-8">Contact Us</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
-                
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                   <input
@@ -170,13 +193,10 @@ export default function ContactForm() {
 
                 {/* Status Message Below Button */}
                 {status && (
-                  <div className={`mt-4 text-center font-medium ${
-                    status === "Message sent successfully!" ? "text-green-600" : "text-red-600"
-                  }`}>
+                  <div className={`mt-4 text-center font-medium ${status === "Message sent successfully!" ? "text-green-600" : "text-red-600"}`}>
                     {status}
                   </div>
                 )}
-
               </form>
             </div>
           </div>

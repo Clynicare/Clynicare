@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useCallback } from 'react';
 import { Stethoscope, X } from 'lucide-react';
@@ -11,8 +11,9 @@ import { easeIn, motion } from 'framer-motion';
 import Footer from '@/components/Footer';
 require('dotenv').config();
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// Service Card Component
 function ServiceCard({ service, onClick }) {
   return (
     <motion.div
@@ -25,6 +26,7 @@ function ServiceCard({ service, onClick }) {
           alt={service.service_name}
           fill
           className="object-cover"
+          loading="lazy" // Lazy load for performance
         />
       </div>
       <div className="p-6">
@@ -41,6 +43,7 @@ function ServiceCard({ service, onClick }) {
   );
 }
 
+// Booking Modal Component
 function BookingModal({ service, onClose }) {
   const [formData, setFormData] = useState({
     patient_name: '',
@@ -56,7 +59,6 @@ function BookingModal({ service, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(process.env.NEXT_PUBLIC_API_URL)
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `${API_BASE_URL}/api/bookings`,
@@ -68,21 +70,13 @@ function BookingModal({ service, onClose }) {
           },
         }
       );
-     
+
       alert(response.status === 200 ? 'Booking successful' : 'Booking failed');
       router.push('/Bookings');
       onClose();
     } catch (error) {
-    
-
       console.error('Booking Error:', error);
-      if(error.status===403){
-        alert('Make Sure You are Logged in ')
-        router.push('/Signup')
-      }else{
-        alert('Please Enter the details Correctly')
-      }
-      
+      alert('Please enter the details correctly or ensure you are logged in');
     }
   };
 
@@ -105,88 +99,84 @@ function BookingModal({ service, onClose }) {
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
           Book <span className="text-blue-600">{service.service_name}</span>
         </h2>
-        <p className="text-gray-600 text-center text-sm mb-6">
-          {service.service_description ||
-            'This service helps with daily tasks to ensure comfort and safety.'}
-        </p>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 sm:px-4 lg:px-6 ">
-  {['patient_name', 'mobile_no', 'booking_date', 'booking_time', 'address', 'gender'].map(
-    (field, index) => (
-      <div key={index} className={`w-full ${field === 'address' ? 'sm:col-span-2' : ''}`}>
-        <label className="block mb-1 text-sm font-medium text-gray-700">
-          {field.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase())}
-        </label>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-2 px-2 sm:px-4 lg:px-6">
+          {['patient_name', 'mobile_no', 'booking_date', 'booking_time', 'address', 'gender'].map(
+            (field, index) => (
+              <div key={index} className={`w-full ${field === 'address' ? 'sm:col-span-2' : ''}`}>
+                <label className="block mb-1 text-sm font-medium text-gray-700">
+                  {field.replace('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+                </label>
 
-        {field === 'gender' ? (
-          <div className="relative">
-            <select
-              required
-              value={formData[field]}
-              className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl bg-white text-gray-700 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer shadow-sm"
-              onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-            >
-              <option value="" disabled className="text-gray-400">
-                Select Gender
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Prefer Not To Say">Prefer Not To Say</option>
-            </select>
-            <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-sm">▼</div>
+                {field === 'gender' ? (
+                  <div className="relative">
+                    <select
+                      required
+                      value={formData[field]}
+                      className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl bg-white text-gray-700 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer shadow-sm"
+                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                    >
+                      <option value="" disabled className="text-gray-400">
+                        Select Gender
+                      </option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Prefer Not To Say">Prefer Not To Say</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-sm">▼</div>
+                  </div>
+                ) : (
+                  <input
+                    type={
+                      field.includes('date')
+                        ? 'date'
+                        : field.includes('time')
+                        ? 'time'
+                        : 'text'
+                    }
+                    required
+                    className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    value={formData[field]}
+                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                  />
+                )}
+              </div>
+            )
+          )}
+
+          <div className="sm:col-span-2">
+            <label className="block mb-1 text-sm font-medium text-gray-700">Additional Requirements</label>
+            <textarea
+              placeholder="Any additional requirements?"
+              className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              rows="3"
+              value={formData.additional_requirements}
+              onChange={(e) => setFormData({ ...formData, additional_requirements: e.target.value })}
+            ></textarea>
           </div>
-        ) : (
-          <input
-            type={
-              field.includes('date')
-                ? 'date'
-                : field.includes('time')
-                ? 'time'
-                : 'text'
-            }
-            required
-            className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-            value={formData[field]}
-            onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-          />
-        )}
-      </div>
-    )
-  )}
 
-  <div className="sm:col-span-2">
-    <label className="block mb-1 text-sm font-medium text-gray-700">Additional Requirements</label>
-    <textarea
-      placeholder="Any additional requirements?"
-      className="w-full p-3 sm:p-4 border border-gray-300 rounded-lg text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-      rows="3"
-      value={formData.additional_requirements}
-      onChange={(e) => setFormData({ ...formData, additional_requirements: e.target.value })}
-    ></textarea>
-  </div>
-
-  <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 sm:gap-0 sm:col-span-2 mt-4">
-    <button
-      type="button"
-      onClick={onClose}
-      className="w-full sm:w-auto px-5 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
-    >
-      Cancel
-    </button>
-    <button
-      type="submit"
-      className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-all"
-    >
-      Book Now
-    </button>
-  </div>
-</form>
-
+          <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 sm:gap-0 sm:col-span-2 mt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="w-full sm:w-auto px-5 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-all"
+            >
+              Book Now
+            </button>
+          </div>
+        </form>
       </motion.div>
     </div>
   );
 }
 
+// Services Page Component
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
@@ -199,6 +189,8 @@ export default function ServicesPage() {
   };
 
   const serviceName = getQueryParam('name');
+
+  // Fetching services with optimization
   const fetchServices = useCallback(async () => {
     try {
       const response = await axios.get(

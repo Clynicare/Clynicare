@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Activity,
   LogIn,
@@ -14,39 +14,42 @@ import axios from "axios";
 import Link from "next/link";
 import { easeIn, motion } from "framer-motion";
 
-function Nav() {
+const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // Set initial loading to true
+  const [loading, setLoading] = useState(true);
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
 
-  useEffect(() => {
-    const handleLogin = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const response = await axios.post(
-            `${API_BASE_URL}/api/token-valid`,
-            {},
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-          setUserinfo(response.data.userInfo);
-        } catch (error) {
-          console.error("Token validation failed:", error);
-          setUserinfo(null);
-        }
+  // Function to validate token and fetch user info
+  const handleLogin = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/api/token-valid`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setUserinfo(response.data.userInfo);
+      } catch (error) {
+        console.error("Token validation failed:", error);
+        setUserinfo(null);
       }
-      setLoading(false);
-    };
+    }
+    setLoading(false); // Set loading to false once the validation is complete
+  }, []);
 
+  // Call handleLogin only once when the component is mounted
+  useEffect(() => {
     handleLogin();
-  }, []); // Only run once on mount
+  }, [handleLogin]);
 
-  const handleLogout = () => {
+  // Handle logout function
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("token");
     setUserinfo(null);
-  };
+  }, []);
 
   return (
     <section className="fixed w-full bg-transparent text-black py-4 backdrop-blur-md z-50 px-6 md:px-[100px]">
@@ -79,7 +82,6 @@ function Nav() {
           </ul>
 
           {/* Auth Buttons */}
-          
           {loading ? (
             <p className="text-gray-500 w-[200px] pl-10">Loading...</p>
           ) : userinfo ? (
@@ -186,6 +188,6 @@ function Nav() {
       )}
     </section>
   );
-}
+};
 
-export default Nav;
+export default React.memo(Nav);

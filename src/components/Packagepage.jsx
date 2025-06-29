@@ -1,57 +1,53 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from "react";
 import { Check, Sparkles } from "lucide-react";
 
-const Packagepage = () => {
+const packs = [
+  {
+    name: 'Basic Care ',
+    price: { monthly: 50, yearly: 500 },
+    benefits: [
+      'Basic feeding assistance',
+      'Medication reminders',
+      'Light mobility aid & transfers',
+      'Hygiene support (bathing, diaper changes)'
+    ],
+    featured: false,
+  },
+  {
+    name: 'Advanced Care',
+    price: { monthly: 150, yearly: 1500 },
+    benefits: [
+      'Medication administration (oral, topical)',
+      'Wound care & dressing changes',
+      'Compression stocking application',
+      'Catheter & ostomy care',
+      'Pain management assistance'
+    ],
+    featured: true,
+  },
+  {
+    name: 'Total Care',
+    price: { monthly: 300, yearly: 3000 },
+    benefits: [
+      'Injection administration (Insulin, B12, Antibiotics, etc.)',
+      'IV Drip setup & monitoring',
+      'Vital sign monitoring (BP, oxygen, heart rate)',
+      'Physical therapy support',
+      'Emergency medical response'
+    ],
+    featured: false,
+  },
+];
+
+const Packagepage = React.memo(() => {
   const [isMonthly, setIsMonthly] = useState(true);
 
-  const packs = [
-    {
-      name: 'Basic Care ',
-      price: {
-        monthly: 50,
-        yearly: 500,
-      },
-      benefits: [
-        'Basic feeding assistance',
-        'Medication reminders',
-        'Light mobility aid & transfers',
-        'Hygiene support (bathing, diaper changes)'
-      ],
-      featured: false,
-    },
-    {
-      name: 'Advanced Care',
-      price: {
-        monthly: 150,
-        yearly: 1500,
-      },
-      benefits: [
-        'Medication administration (oral, topical)',
-        'Wound care & dressing changes',
-        'Compression stocking application',
-        'Catheter & ostomy care',
-        'Pain management assistance'
-      ],
-      featured: true,
-    },
-    {
-      name: 'Total Care',
-      price: {
-        monthly: 300,
-        yearly: 3000,
-      },
-      benefits: [
-        'Injection administration (Insulin, B12, Antibiotics, etc.)',
-        'IV Drip setup & monitoring',
-        'Vital sign monitoring (BP, oxygen, heart rate)',
-        'Physical therapy support',
-        'Emergency medical response'
-      ],
-      featured: false,
-    },
-  ];
+  const getMonthlyPrice = (pack) => (isMonthly ? pack.price.monthly : Math.floor(pack.price.yearly / 12));
+
+  // Use useMemo to memoize the calculation to avoid unnecessary re-calculations
+  const packsToShow = useMemo(() => packs, [isMonthly]);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-blue-50">
@@ -75,9 +71,7 @@ const Packagepage = () => {
             <button
               onClick={() => setIsMonthly(true)}
               className={`relative rounded-full px-6 py-1.5 text-sm font-medium transition-colors ${
-                isMonthly
-                  ? 'bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-white'
-                  : 'text-gray-600 hover:text-gray-800'
+                isMonthly ? 'bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-white' : 'text-gray-600 hover:text-gray-800'
               }`}
             >
               Monthly
@@ -85,9 +79,7 @@ const Packagepage = () => {
             <button
               onClick={() => setIsMonthly(false)}
               className={`relative rounded-full px-6 py-1.5 text-sm font-medium transition-colors ${
-                !isMonthly
-                  ? 'bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-white'
-                  : 'text-gray-600 hover:text-gray-800'
+                !isMonthly ? 'bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] text-white' : 'text-gray-600 hover:text-gray-800'
               }`}
             >
               Yearly
@@ -99,15 +91,13 @@ const Packagepage = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="flex-1 grid gap-4 lg:grid-cols-3 mt-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full ">
-          {packs.map((pack, index) => (
+        <div className="flex-1 grid gap-4 lg:grid-cols-3 mt-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
+          {packsToShow.map((pack, index) => (
             <div
               key={pack.name}
               className={`relative rounded-xl ${
-                pack.featured
-                  ? 'border-2 border-gray-600 shadow-blue-100'
-                  : 'border border-gray-200'
-              } bg-white p-4 shadow-lg transition-transform duration-300 hover:scale-105 md:h-[400px] h-[300px]  mt-[45px] `}
+                pack.featured ? 'border-2 border-gray-600 shadow-blue-100' : 'border border-gray-200'
+              } bg-white p-4 shadow-lg transition-transform duration-300 hover:scale-105 md:h-[400px] h-[300px] mt-[45px]`}
             >
               {pack.featured && (
                 <div className="absolute -top-3 left-0 right-0 mx-auto w-fit rounded-full bg-gradient-to-b from-[#4DA1A9] to-[#007BA7] px-3 py-0.5 text-xs font-medium text-white">
@@ -124,7 +114,7 @@ const Packagepage = () => {
 
               <div className="mb-3 flex items-baseline">
                 <span className="text-3xl font-bold tracking-tight text-gray-900">
-                  ${isMonthly ? pack.price.monthly : Math.floor(pack.price.yearly / 12)}
+                  ${getMonthlyPrice(pack)}
                 </span>
                 <span className="ml-1 text-sm text-gray-500">/month</span>
               </div>
@@ -164,6 +154,6 @@ const Packagepage = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Packagepage;

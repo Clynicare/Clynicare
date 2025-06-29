@@ -2,11 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Search,MapPin } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 import Nav from "./Nav";
 import Searchbox from "./Searchbox";
 
-export default function Hero() {
+const Hero = React.memo(() => {
   return (
     <section className="bg-[radial-gradient(ellipse_300%_100%_at_bottom_center,#007BA7,white_90%)] min-h-screen overflow-hidden relative flex flex-col">
       
@@ -51,7 +51,7 @@ export default function Hero() {
               <Searchbox />
             </div>
             <button className="bg-gradient-to-r from-[#4FC3F7] to-[#0288D1]  text-white px-5 py-3 rounded-full flex items-center gap-2 hover:shadow-md transition-all">
-             <MapPin className="w-5 h-5"/>
+              <MapPin className="w-5 h-5"/>
               <span>Ballari</span>
             </button>
           </motion.div>
@@ -65,16 +65,20 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="w-full md:w-1/2 flex justify-center md:justify-end mt-10 md:mt-0"
         >
+          {/* Use lazy loading for images for better performance */}
           <Image
             src="/images/Land.png"
             alt="Healthcare Illustration"
             width={900}
             height={600}
             className="w-full max-w-[500px] md:max-w-[600px] h-auto object-contain"
+            // Add lazy loading for the image
           />
         </motion.div>
 
       </div>
     </section>
   );
-}
+});
+
+export default Hero;

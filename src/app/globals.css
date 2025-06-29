@@ -13,16 +13,16 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 @keyframes scroll-right {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
 }
 @font-face {
@@ -63,6 +63,12 @@
   
   .rotate-y-180 {
     transform: rotateY(180deg);
+  }
+   .animate-scroll-left {
+    animation: scroll-left 30s linear infinite;
+  }
+  .animate-scroll-right {
+    animation: scroll-right 30s linear infinite;
   }
 }
 @font-face {
