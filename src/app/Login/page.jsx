@@ -4,7 +4,7 @@ import { Mail, Lock, ArrowRight, Loader } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
 
 function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });

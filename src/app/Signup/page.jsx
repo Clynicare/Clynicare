@@ -13,13 +13,14 @@ function Login() {
     phone: ''
   });
   
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL|| 'http://localhost:7000';
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(`${API_BASE_URL}/api/user`, formData);
-    if (response.status === 200) {
+    console.log("the sucess")
+    if (response.status === 201) {
       alert("The user has been successfully created", formData.name);
       router.push('/Login');
     }
