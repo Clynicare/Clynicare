@@ -71,7 +71,7 @@ function BookingModal({ service, onClose }) {
         }
       );
 
-      alert(response.status === 200 ? 'Booking successful' : 'Booking failed');
+      alert(response.status >= 200 && response.status < 300 ? 'Booking successful' : 'Booking failed');
       router.push('/Bookings');
       onClose();
     } catch (error) {
