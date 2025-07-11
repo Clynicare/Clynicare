@@ -1,12 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { BookingCard } from '../../components/BookingCard';
-import { BookingDetailsModal } from '../../components/BookingDetailsModal';
+import axios from 'axios';
+
+// Try different import patterns - uncomment the ones that work for your components
+// Option 1: Default imports
+import BookingCard from '../../components/BookingCard';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import axios from 'axios';
 import Loading from '@/components/Loading';
+
+// Option 2: Named imports (try these if default imports don't work)
+// import { BookingCard } from '../../components/BookingCard';
+// import { Nav } from '@/components/Nav';
+// import { Footer } from '@/components/Footer';
+// import { Loading } from '@/components/Loading';
+
+// This one is already correct as named import
+import { BookingDetailsModal } from '../../components/BookingDetailsModal';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -14,8 +25,8 @@ function App() {
   const [mockBookings, setMockBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);  // Added loading state
-  const [error, setError] = useState(null);  // Added error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -34,9 +45,8 @@ function App() {
           },
         });
 
-        console.log("API Response: ", response.data); // Log the response to inspect it
+        console.log("API Response: ", response.data);
         
-        // Check if the data is an array
         if (Array.isArray(response.data)) {
           setMockBookings(response.data);
         } else {
@@ -63,25 +73,41 @@ function App() {
     setSelectedBooking(null);
   };
 
+  // Debug: Check if components are defined
+  console.log("Component checks:", {
+    BookingCard: typeof BookingCard,
+    BookingDetailsModal: typeof BookingDetailsModal,
+    Nav: typeof Nav,
+    Footer: typeof Footer,
+    Loading: typeof Loading
+  });
+
   return (
     <div className="font-sans bg-white overflow-x-hidden min-h-screen">
-      <Nav />
+      {Nav && <Nav />}
 
       <main className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {loading ? (
-            <Loading />
+            Loading ? <Loading /> : <div>Loading...</div>
           ) : error ? (
             <div className="h-[50vh] w-full flex items-center justify-center">
               <h1 className="text-center mt-10 text-black/50 text-lg">{error}</h1>
             </div>
           ) : Array.isArray(mockBookings) && mockBookings.length > 0 ? (
             mockBookings.map((booking) => (
-              <BookingCard
-                key={booking.id}
-                booking={booking}
-                onClick={() => handleBookingClick(booking)}
-              />
+              BookingCard ? (
+                <BookingCard
+                  key={booking.id}
+                  booking={booking}
+                  onClick={() => handleBookingClick(booking)}
+                />
+              ) : (
+                <div key={booking.id} className="p-4 border rounded">
+                  <p>BookingCard component not found</p>
+                  <pre>{JSON.stringify(booking, null, 2)}</pre>
+                </div>
+              )
             ))
           ) : (
             <div className="h-[50vh] w-full flex items-center justify-center">
@@ -93,13 +119,15 @@ function App() {
         </div>
       </main>
 
-      <BookingDetailsModal
-        booking={selectedBooking}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      {BookingDetailsModal && (
+        <BookingDetailsModal
+          booking={selectedBooking}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
 
-      <Footer />
+      {Footer && <Footer />}
     </div>
   );
 }
