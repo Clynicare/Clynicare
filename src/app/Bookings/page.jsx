@@ -34,7 +34,9 @@ function App() {
           },
         });
 
-        // Ensure the data is an array before setting it
+        console.log("API Response: ", response.data); // Log the response to inspect it
+        
+        // Check if the data is an array
         if (Array.isArray(response.data)) {
           setMockBookings(response.data);
         } else {
@@ -73,7 +75,7 @@ function App() {
             <div className="h-[50vh] w-full flex items-center justify-center">
               <h1 className="text-center mt-10 text-black/50 text-lg">{error}</h1>
             </div>
-          ) : mockBookings.length > 0 ? (
+          ) : Array.isArray(mockBookings) && mockBookings.length > 0 ? (
             mockBookings.map((booking) => (
               <BookingCard
                 key={booking.id}
