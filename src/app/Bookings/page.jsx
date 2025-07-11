@@ -81,10 +81,14 @@ function App() {
     Footer: typeof Footer,
     Loading: typeof Loading
   });
+  
+  // Additional debug for BookingCard since it's showing as "object"
+  console.log("BookingCard details:", BookingCard);
+  console.log("BookingCard.default:", BookingCard.default);
 
   return (
     <div className="font-sans bg-white overflow-x-hidden min-h-screen">
-      {Nav && <Nav />}
+      {Nav && React.isValidElement(<Nav />) ? <Nav /> : null}
 
       <main className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
@@ -95,20 +99,37 @@ function App() {
               <h1 className="text-center mt-10 text-black/50 text-lg">{error}</h1>
             </div>
           ) : Array.isArray(mockBookings) && mockBookings.length > 0 ? (
-            mockBookings.map((booking) => (
-              BookingCard ? (
-                <BookingCard
-                  key={booking.id}
+            mockBookings.map((booking) => {
+              // Use _id as key since that's what's in your API response
+              const bookingKey = booking._id || booking.id || Math.random();
+              
+              // Handle BookingCard being an object (might need .default)
+              const BookingComponent = typeof BookingCard === 'function' ? BookingCard : BookingCard.default;
+              
+              return BookingComponent ? (
+                <BookingComponent
+                  key={bookingKey}
                   booking={booking}
                   onClick={() => handleBookingClick(booking)}
                 />
               ) : (
-                <div key={booking.id} className="p-4 border rounded">
-                  <p>BookingCard component not found</p>
-                  <pre>{JSON.stringify(booking, null, 2)}</pre>
+                <div key={bookingKey} className="p-4 border rounded bg-gray-100">
+                  <p className="font-semibold mb-2">Booking Details:</p>
+                  <p><strong>Patient:</strong> {booking.patient_name}</p>
+                  <p><strong>Service:</strong> {booking.service_id?.service_name}</p>
+                  <p><strong>Date:</strong> {new Date(booking.booking_date).toLocaleDateString()}</p>
+                  <p><strong>Time:</strong> {booking.booking_time}</p>
+                  <p><strong>Status:</strong> {booking.status}</p>
+                  <p><strong>Address:</strong> {booking.address}</p>
+                  <button 
+                    onClick={() => handleBookingClick(booking)}
+                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    View Details
+                  </button>
                 </div>
-              )
-            ))
+              );
+            })
           ) : (
             <div className="h-[50vh] w-full flex items-center justify-center">
               <h1 className="text-center mt-10 text-black/50 text-lg">
