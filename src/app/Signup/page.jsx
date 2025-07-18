@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from 'react';
 import { Heart, Mail, Lock, User, Phone, ArrowRight } from 'lucide-react';
 import axios from 'axios';
@@ -13,18 +14,20 @@ function Login() {
     phone: ''
   });
   
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL|| 'http://localhost:7000';
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${API_BASE_URL}/api/user`, formData);
-    console.log("the sucess")
-    if (response.status === 201) {
-      alert("The user has been successfully created", formData.name);
-      router.push('/Login');
+    try {
+      const response = await axios.post(`${API_BASE_URL}/api/user`, formData);
+      if (response.status === 201) {
+        alert(`User ${formData.name} successfully created`);
+        router.push('/Login');
+      }
+    } catch (error) {
+      console.error("Error during login or registration", error);
     }
-    console.log(formData);
   };
 
   const handleInputChange = (e) => {
