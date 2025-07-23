@@ -14,7 +14,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
@@ -23,7 +23,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(50%);
   }
 }
 @font-face {
@@ -45,11 +45,32 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0a2540;
+  --brand: 210 100% 60%;
+  --brand-foreground: 210 100% 70%;
+}
+
+.dark {
+  --background: #0a2540;
+  --foreground: #f8fafc;
+  --brand: 210 100% 70%;
+  --brand-foreground: 210 100% 60%;
 }
 
 @layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
   .perspective {
     perspective: 2000px;
   }
