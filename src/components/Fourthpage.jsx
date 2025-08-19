@@ -7,12 +7,12 @@ import { motion } from 'framer-motion';
 // InfiniteScroll Component: Displays horizontally scrolling images
 const InfiniteScroll = React.memo(({ direction = 'left' }) => {
   const images = [
-    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=500", // Nurse with patient
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&q=80&w=500", // Nurse video call consultation
-    "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=500", // Healthcare professional with patient
-    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=500", // Nurse caring for elderly patient
-    "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=500", // Telemedicine consultation
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=500", // Nurse with medical equipment
+    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=500", // Nurse caring for patient
+    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=500", // Nurse with elderly patient
+    "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=500", // Healthcare professional
+    "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=500", // Home healthcare nurse
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=500", // Medical consultation
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=500", // Nurse with equipment
   ];
 
   return (
@@ -43,7 +43,7 @@ const App = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-teal-400/10 to-blue-400/10 rounded-full blur-3xl"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
@@ -79,10 +79,10 @@ const App = () => {
             <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-full">
               <Heart className="w-6 h-6 text-white" />
             </div>
-            <div className="bg-gradient-to-r from-cyan-500 to-teal-500 p-3 rounded-full">
+            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-full">
               <Video className="w-6 h-6 text-white" />
             </div>
-            <div className="bg-gradient-to-r from-teal-500 to-blue-500 p-3 rounded-full">
+            <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-full">
               <Shield className="w-6 h-6 text-white" />
             </div>
           </motion.div>
@@ -130,11 +130,11 @@ const App = () => {
               <span className="text-gray-700 font-medium">24/7 Available</span>
             </div>
             <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
-              <Video className="w-5 h-5 text-cyan-600" />
+              <Video className="w-5 h-5 text-blue-600" />
               <span className="text-gray-700 font-medium">Video Consultations</span>
             </div>
             <div className="flex items-center gap-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
-              <Shield className="w-5 h-5 text-teal-600" />
+              <Shield className="w-5 h-5 text-cyan-600" />
               <span className="text-gray-700 font-medium">Certified Nurses</span>
             </div>
           </motion.div>

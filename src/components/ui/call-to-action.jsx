@@ -1,5 +1,5 @@
 "use client";
-import { Heart, Shield, Clock, Phone, ArrowRight, Stethoscope } from "lucide-react";
+import { Heart, Shield, Clock, Phone, ArrowRight, Stethoscope } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";

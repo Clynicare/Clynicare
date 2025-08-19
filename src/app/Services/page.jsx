@@ -179,6 +179,8 @@ function BookingModal({ service, onClose }) {
 // Services Page Component
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
 
   const getQueryParam = (key) => {
@@ -193,12 +195,18 @@ export default function ServicesPage() {
   // Fetching services with optimization
   const fetchServices = useCallback(async () => {
     try {
+      setLoading(true);
+      setError(null);
       const response = await axios.get(
         `${API_BASE_URL}/Services${serviceName ? `?name=${serviceName}` : ''}`
       );
-      setServices(response.data);
+      setServices(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Fetching services failed:', error);
+      setError('Failed to load services');
+      setServices([]);
+    } finally {
+      setLoading(false);
     }
   }, [serviceName]);
 
@@ -212,7 +220,19 @@ export default function ServicesPage() {
       <div className="min-h-screen bg-gray-50 ">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-4xl font-sans font-bold text-gray-900 text-center mt-11">HomeHealth Services</h1>
-          {services.length > 0 ? (
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <div className="text-center mt-8">
+              <p className="text-red-600 text-lg">{error}</p>
+              <button 
+                onClick={fetchServices}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          ) : services && services.length > 0 ? (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -224,7 +244,9 @@ export default function ServicesPage() {
               ))}
             </motion.div>
           ) : (
-            <Loading />
+            <div className="text-center mt-8">
+              <p className="text-gray-600 text-lg">No services available at the moment.</p>
+            </div>
           )}
         </main>
       </div>

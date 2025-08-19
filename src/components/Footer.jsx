@@ -81,7 +81,7 @@ export default function Footer() {
               className='bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3'
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.open('tel:+1234567890', '_self')}
+              onClick={() => window.open('tel:+918088058792', '_self')}
             >
               <Phone className='w-5 h-5' />
               Book Tele-Consultancy Now
@@ -91,13 +91,38 @@ export default function Footer() {
         </motion.div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Our Services */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+          {/* Professional Login */}
           <motion.div 
             className="flex flex-col gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className='text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-transparent bg-clip-text'>Professional Login</h3>
+            <div className='flex flex-col gap-3'>
+              <Link href="/AgencyLogin" className='text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2'>
+                <Activity className='w-4 h-4' />
+                <span>Agency Portal</span>
+              </Link>
+              <Link href="/NurseLogin" className='text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2'>
+                <Heart className='w-4 h-4' />
+                <span>Nurse Portal</span>
+              </Link>
+              <Link href="/DoctorLogin" className='text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2'>
+                <Video className='w-4 h-4' />
+                <span>Doctor Portal</span>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Our Services */}
+          <motion.div 
+            className="flex flex-col gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <h3 className='text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-transparent bg-clip-text'>Our Services</h3>
@@ -126,7 +151,7 @@ export default function Footer() {
             className="flex flex-col gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
             <h3 className='text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-transparent bg-clip-text'>Quick Links</h3>
@@ -144,14 +169,14 @@ export default function Footer() {
             className="flex flex-col gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
             <h3 className='text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-transparent bg-clip-text'>Contact Info</h3>
             <div className='flex flex-col gap-3'>
               <div className='flex items-center gap-3 text-gray-600'>
                 <Phone className='w-4 h-4 text-blue-500' />
-                <span>+91 12345 67890</span>
+                <span>+91 8088058792</span>
               </div>
               <div className='flex items-center gap-3 text-gray-600'>
                 <Mail className='w-4 h-4 text-blue-500' />
@@ -188,7 +213,7 @@ export default function Footer() {
             className="flex flex-col gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
             <h3 className='text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-transparent bg-clip-text'>Download App</h3>

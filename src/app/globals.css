@@ -32,6 +32,10 @@
   font-weight: 100; /* Regular */
   font-style: normal;
 }
+
+.font-bebas {
+  font-family: 'BebasNeue-Regular', sans-serif;
+}
 @font-face {
   font-family: 'sans';
   src: url('../fonts//sans.ttf') format('truetype');

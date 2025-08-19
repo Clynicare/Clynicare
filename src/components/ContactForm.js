@@ -3,7 +3,7 @@
 import { useState, useEffect, useReducer } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import { Mail, Phone, User, Heart, Clock, CheckCircle } from "lucide-react";
+import { Mail, Phone, User, Heart, Clock, CheckCircle } from 'lucide-react';
 import Image from "next/image";
 
 // Reducer function for handling form state

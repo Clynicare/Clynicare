@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { UserPlus, ClipboardList, CalendarCheck, ArrowRight, Sparkles, Heart, Shield, Star, Clock } from "lucide-react";
+import { UserPlus, ClipboardCheck, CalendarCheck, ArrowRight, Sparkles, Heart, Shield, Star, Clock } from "lucide-react";
 import { useRef } from "react";
 
 // Memoize the component to avoid unnecessary re-renders
@@ -24,11 +24,11 @@ const SecondPage = React.memo(() => {
     },
     {
       step: 2,
-      icon: ClipboardList,
+      icon: ClipboardCheck,
       title: "Choose Service",
       description: "Browse our comprehensive nursing services and select the specialized care that perfectly fits your needs.",
-      color: "from-purple-500 to-pink-500",
-      bgColor: "from-purple-50 to-pink-50",
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "from-blue-50 to-cyan-50",
       features: ["Expert nurses", "Various specialties", "Flexible options"]
     },
     {
@@ -36,8 +36,8 @@ const SecondPage = React.memo(() => {
       icon: CalendarCheck,
       title: "Book Appointment",
       description: "Schedule your preferred time slot and get instant confirmation from our qualified, verified nurses.",
-      color: "from-emerald-500 to-teal-500",
-      bgColor: "from-emerald-50 to-teal-50",
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "from-blue-50 to-cyan-50",
       features: ["Instant booking", "Real-time availability", "Confirmed appointments"]
     },
   ];
@@ -75,7 +75,7 @@ const SecondPage = React.memo(() => {
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         <motion.div 
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"
+          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"
           animate={{ rotate: -360, scale: [1, 1.2, 1] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
@@ -87,7 +87,7 @@ const SecondPage = React.memo(() => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/3 right-1/4 w-6 h-6 bg-purple-400 rounded-full opacity-20"
+          className="absolute top-1/3 right-1/4 w-6 h-6 bg-blue-400 rounded-full opacity-20"
           animate={{ y: [10, -10, 10], x: [-5, 5, -5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
@@ -154,14 +154,14 @@ const SecondPage = React.memo(() => {
                 
                 {/* Floating Stats Cards */}
                 <motion.div 
-                  className="absolute -bottom-8 -right-8 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20"
+                  className="absolute -bottom-8 -right-8 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20 z-20"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 w-12 h-12 rounded-full flex items-center justify-center">
+                    <div className="bg-gradient-to-r from-blue-500 to-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
                       <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ const SecondPage = React.memo(() => {
                 </motion.div>
                 
                 <motion.div 
-                  className="absolute -top-8 -left-8 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20"
+                  className="absolute -top-8 -left-8 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/20 z-20"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.6, delay: 1 }}

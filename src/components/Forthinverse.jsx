@@ -9,7 +9,7 @@ import { Stethoscope, Users, Phone, Star, CheckCircle, ArrowRight } from 'lucide
 const images = [
   "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?auto=format&fit=crop&q=80&w=500", // Nurse video consultation
   "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=500", // Telemedicine consultation
-  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=500", // Nurse with patient
+  "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=500", // Home healthcare nurse
   "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=500", // Nurse caring for elderly
   "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=500", // Healthcare professional
   "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=500", // Nurse with equipment

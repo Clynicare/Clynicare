@@ -1,4 +1,4 @@
-import { LucideStethoscope, LucideUser, LucideGithub, LucideArrowRight } from "lucide-react";
+import { Stethoscope, User, Github, ArrowRight } from 'lucide-react';
 import React from "react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;

@@ -9,6 +9,8 @@ import {
   LogOut,
   Menu,
   X,
+  Heart,
+  Stethoscope,
 } from "lucide-react";
 import axios from "axios";
 import Link from "next/link";
@@ -37,13 +39,24 @@ const Nav = () => {
         const response = await axios.post(
           `${API_BASE_URL}/api/token-valid`,
           {},
-          { headers: { Authorization: `Bearer ${token}` } }
+          { 
+            headers: { Authorization: `Bearer ${token}` },
+            timeout: 5000
+          }
         );
-        setUserinfo(response.data.userInfo);
+        if (response.data && response.data.userInfo) {
+          setUserinfo(response.data.userInfo);
+        } else {
+          localStorage.removeItem("token");
+          setUserinfo(null);
+        }
       } catch (error) {
         console.error("Token validation failed:", error);
+        localStorage.removeItem("token");
         setUserinfo(null);
       }
+    } else {
+      setUserinfo(null);
     }
     setLoading(false);
   }, [API_BASE_URL]);
@@ -89,15 +102,33 @@ const Nav = () => {
 
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex space-x-6">
-              {["Home", "Services", "Bookings", "About Us", "Contact Us"].map((item, index) => (
+              {["Home", "Services", "Nurses", "Bookings", "About Us", "Contact Us"].map((item, index) => (
                 <motion.div key={item} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link
-                    href={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
-                    className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 group"
-                  >
-                    {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
+                  {item === "Services" ? (
+                    <button
+                      onClick={() => {
+                        if (typeof window !== 'undefined') {
+                          if (window.location.pathname === '/') {
+                            document.querySelector('#services-section')?.scrollIntoView({ behavior: 'smooth' });
+                          } else {
+                            window.location.href = '/#services-section';
+                          }
+                        }
+                      }}
+                      className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 group"
+                    >
+                      {item}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 group-hover:w-full transition-all duration-300"></span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
+                      className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 group"
+                    >
+                      {item}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>
@@ -125,6 +156,10 @@ const Nav = () => {
                       className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl p-4 z-50 border border-white/20"
                     >
                       <p className="text-gray-600 font-semibold mb-3">{userinfo.email}</p>
+                      <Link href="/PatientDashboard" className="flex items-center px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-xl transition-colors">
+                        <Activity className="w-4 h-4 mr-2" />
+                        Dashboard
+                      </Link>
                       <Link href="/profile" className="flex items-center px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-xl transition-colors">
                         <User className="w-4 h-4 mr-2" />
                         Profile
@@ -176,16 +211,41 @@ const Nav = () => {
         >
           <div className="px-4 py-6 space-y-4">
             <nav className="space-y-4">
-              {["Home", "Services", "Bookings", "About Us", "Contact Us"].map((item) => (
-                <Link 
-                  key={item}
-                  href={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
-                  className="block text-gray-700 hover:text-blue-600 font-medium py-2 px-4 rounded-xl hover:bg-blue-50 transition-all"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              ))}
+              {["Home", "Services", "Nurses", "Bookings", "About Us", "Contact Us"].map((item) => {
+                if (item === "Services") {
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        if (typeof window !== 'undefined') {
+                          if (window.location.pathname === '/') {
+                            setTimeout(() => {
+                              document.querySelector('#services-section')?.scrollIntoView({ behavior: 'smooth' });
+                            }, 100);
+                          } else {
+                            window.location.href = '/#services-section';
+                          }
+                        }
+                      }}
+                      className="block text-gray-700 hover:text-blue-600 font-medium py-2 px-4 rounded-xl hover:bg-blue-50 transition-all w-full text-left"
+                    >
+                      {item}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <Link 
+                      key={item}
+                      href={item === "Home" ? "/" : `/${item.replace(" ", "")}`}
+                      className="block text-gray-700 hover:text-blue-600 font-medium py-2 px-4 rounded-xl hover:bg-blue-50 transition-all"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item}
+                    </Link>
+                  );
+                }
+              })}
             </nav>
 
             <div className="pt-4 border-t border-gray-200">
