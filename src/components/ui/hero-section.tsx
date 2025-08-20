@@ -60,7 +60,7 @@ export function HeroSection({
               <span className="text-muted-foreground">{badge.text}</span>
               <a href={badge.action.href} className="flex items-center gap-1">
                 {badge.action.text}
-                <ArrowRightIcon className="h-3 w-3" />
+                <ArrowRight className="h-3 w-3" />
               </a>
             </Badge>
           )}
