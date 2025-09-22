@@ -9,7 +9,8 @@ const packs = [
   {
     name: 'Basic Care',
     subtitle: 'Essential Healthcare',
-    price: { monthly: 50, yearly: 500 },
+    price: { monthly: 800, yearly: 8000 },
+    originalPrice: { monthly: 1500, yearly: 15000 },
     benefits: [
       'Basic feeding assistance',
       'Medication reminders',
@@ -26,7 +27,8 @@ const packs = [
   {
     name: 'Advanced Care',
     subtitle: 'Professional Healthcare',
-    price: { monthly: 150, yearly: 1500 },
+    price: { monthly: 1800, yearly: 18000 },
+    originalPrice: { monthly: 2500, yearly: 25000 },
     benefits: [
       'Medication administration (oral, topical)',
       'Wound care & dressing changes',
@@ -44,7 +46,8 @@ const packs = [
   {
     name: 'Total Care',
     subtitle: 'Premium Healthcare',
-    price: { monthly: 300, yearly: 3000 },
+    price: { monthly: 3200, yearly: 32000 },
+    originalPrice: { monthly: 4500, yearly: 45000 },
     benefits: [
       'Injection administration (Insulin, B12, etc.)',
       'IV Drip setup & monitoring',
@@ -200,11 +203,21 @@ const Packagepage = React.memo(() => {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{pack.name}</h3>
                   <p className="text-gray-600 mb-6">{pack.subtitle}</p>
 
-                  <div className="mb-6 flex items-baseline">
-                    <span className="text-5xl font-bold tracking-tight text-gray-900">
-                      ${getMonthlyPrice(pack)}
-                    </span>
-                    <span className="ml-2 text-lg text-gray-500">/month</span>
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="text-5xl font-bold tracking-tight text-gray-900">
+                        ₹{getMonthlyPrice(pack)}
+                      </span>
+                      <span className="ml-2 text-lg text-gray-500">/month</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg text-gray-400 line-through">
+                        ₹{isMonthly ? pack.originalPrice.monthly : Math.floor(pack.originalPrice.yearly / 12)}
+                      </span>
+                      <span className="text-sm bg-red-100 text-red-600 px-2 py-1 rounded-full font-medium">
+                        Save {Math.round(((isMonthly ? pack.originalPrice.monthly : Math.floor(pack.originalPrice.yearly / 12)) - getMonthlyPrice(pack)) / (isMonthly ? pack.originalPrice.monthly : Math.floor(pack.originalPrice.yearly / 12)) * 100)}%
+                      </span>
+                    </div>
                   </div>
 
                   {!isMonthly && (

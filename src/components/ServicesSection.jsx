@@ -27,7 +27,7 @@ const ServicesSection = () => {
       subtitle: "Professional Care at Your Doorstep",
       description: "Certified nurses provide personalized healthcare services in the comfort of your home with 24/7 availability and emergency support.",
       image: "https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=600&h=400&fit=crop",
-      price: "Starting from ₹500/visit",
+      price: "Starting from ₹200/visit",
       features: [
         { icon: Clock, text: "24/7 Emergency Availability" },
         { icon: Shield, text: "Certified & Verified Nurses" },
@@ -58,19 +58,36 @@ const ServicesSection = () => {
     teleconsultancy: {
       id: 'teleconsultancy',
       title: "Hybrid Teleconsultancy",
-      subtitle: "Expert Doctors + Home Nursing",
-      description: "Revolutionary hybrid approach where our nurses visit you at home while expert doctors provide consultation via video call for comprehensive care.",
+      subtitle: "India's First Nurse-Assisted Video Consultation",
+      description: "Experience the future of healthcare with our groundbreaking hybrid model. A certified nurse visits your home to conduct physical examinations while our expert doctors provide real-time consultation via HD video call - combining the best of both worlds for comprehensive, accurate diagnosis and treatment.",
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
       price: "Starting from ₹800/session",
       features: [
-        { icon: Video, text: "HD Video Consultations" },
-        { icon: Heart, text: "Nurse-Assisted Examinations" },
-        { icon: Monitor, text: "Real-time Vital Monitoring" },
-        { icon: Shield, text: "Secure Digital Platform" },
-        { icon: CheckCircle, text: "Digital Prescriptions" },
-        { icon: Clock, text: "Same-day Appointments" }
+        { icon: Video, text: "Ultra HD Video Consultations" },
+        { icon: Heart, text: "Physical Examination by Nurse" },
+        { icon: Monitor, text: "Live Vital Signs Monitoring" },
+        { icon: Shield, text: "End-to-End Encrypted Platform" },
+        { icon: CheckCircle, text: "Instant Digital Prescriptions" },
+        { icon: Clock, text: "24/7 Emergency Availability" }
       ],
-      services: ["General Consultation", "Specialist Care", "Follow-up Visits", "Health Monitoring", "Prescription Refills", "Second Opinions"]
+      services: [
+        "Complete Physical Examination + Video Consultation",
+        "Specialist Doctor Consultation with Nurse Support", 
+        "Comprehensive Health Assessment & Live Diagnosis",
+        "Real-time Medical Prescription & Treatment Plan",
+        "Chronic Disease Management with Home Monitoring",
+        "Emergency Consultation with Immediate Nurse Care",
+        "Post-Surgery Follow-up with Physical Examination",
+        "Geriatric Care with Assisted Video Consultation",
+        "Pediatric Consultation with Parent & Nurse Support",
+        "Mental Health Consultation with Comfort of Home",
+        "Cardiology Consultation with ECG & Vitals",
+        "Diabetes Management with Blood Sugar Monitoring",
+        "Hypertension Care with BP Monitoring",
+        "Wound Assessment with Real-time Doctor Guidance",
+        "Medication Review with Nurse Administration",
+        "Health Screening with Instant Doctor Analysis"
+      ]
     }
   };
 
@@ -95,7 +112,7 @@ const ServicesSection = () => {
             Choose Your <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Healthcare Service</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Two innovative approaches to healthcare - Traditional nursing care or our revolutionary hybrid teleconsultancy
+            Experience India's first hybrid healthcare model - Choose traditional home nursing care or our revolutionary nurse-assisted video consultations where certified nurses conduct physical examinations while expert doctors provide real-time consultation via video call
           </p>
         </motion.div>
 

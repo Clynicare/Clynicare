@@ -21,7 +21,7 @@ export default function Home() {
         <EnhancedHero />
         <ServicesSection />
         <SecondPage />
-        <Fourthpage />
+        {/* <Fourthpage /> */}
         <Doctors />
         <AgencyBanner />
         <Packagepage />

@@ -169,19 +169,20 @@ const Doctors = () => {
         </motion.div>
 
         {/* Doctors Cards */}
-        <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-7xl mx-auto">
           {doctors.map((doctor, index) => (
             <motion.div
               key={doctor.name}
-              className="group relative rounded-3xl bg-white/80 backdrop-blur-lg shadow-2xl transition-all duration-500 hover:shadow-3xl border border-white/50 h-fit"
+              className="group relative rounded-3xl bg-white/90 backdrop-blur-lg shadow-xl transition-all duration-500 hover:shadow-2xl border border-white/60 h-full flex flex-col"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              style={{ minHeight: '520px' }}
             >
               {/* Doctor Image */}
-              <div className="aspect-[4/5] overflow-hidden relative">
+              <div className="aspect-[4/5] overflow-hidden relative rounded-t-3xl">
                 <Image
                   src={doctor.imageUrl}
                   alt={doctor.name}
@@ -191,48 +192,52 @@ const Doctors = () => {
                   loading="lazy"
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 {/* Rating Badge */}
-                <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
-                  <Star className="w-4 h-4 text-blue-500 fill-current" />
-                  <span className="text-sm font-semibold text-gray-800">{doctor.rating}</span>
+                <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/95 backdrop-blur-sm rounded-full px-3 py-2 shadow-lg">
+                  <Star className="w-4 h-4 text-amber-500 fill-current" />
+                  <span className="text-sm font-bold text-gray-800">{doctor.rating}</span>
+                </div>
+
+                {/* Specialization Badge */}
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+                  {doctor.specialty}
                 </div>
               </div>
 
-              {/* Doctor Info */}
-              <div className="p-6">
+              {/* Doctor Info - Fixed height container */}
+              <div className="p-6 flex flex-col justify-between flex-grow">
                 {/* Header Info */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
-                  <p className="text-blue-600 font-semibold mb-2">{doctor.specialty}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[56px] flex items-center">{doctor.name}</h3>
                   
                   {/* Stats Row */}
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
+                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4 bg-gray-50 rounded-xl p-3">
                     <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{doctor.experience}</span>
+                      <Clock className="w-4 h-4 text-blue-500" />
+                      <span className="font-medium">{doctor.experience}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Heart className="w-4 h-4 text-blue-500" />
-                      <span>{doctor.patients}</span>
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span className="font-medium">{doctor.patients}</span>
                     </div>
                   </div>
 
                   {/* Consultation Fee */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-gray-600">Consultation</span>
-                    <span className="text-lg font-bold text-blue-600">{doctor.consultationFee}</span>
+                  <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-3">
+                    <span className="text-sm font-medium text-gray-700">Consultation Fee</span>
+                    <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{doctor.consultationFee}</span>
                   </div>
                 </div>
 
                 {/* Specializations */}
                 <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 min-h-[32px]">
                     {doctor.specializations.slice(0, 2).map((spec, idx) => (
                       <span
                         key={idx}
-                        className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full font-medium"
+                        className="text-xs bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 px-3 py-1 rounded-full font-medium border border-blue-200"
                       >
                         {spec}
                       </span>
@@ -240,16 +245,28 @@ const Doctors = () => {
                   </div>
                 </div>
 
+                {/* Languages & Availability */}
+                <div className="mb-4 text-xs text-gray-600 bg-gray-50 rounded-xl p-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Globe className="w-3 h-3 text-blue-500" />
+                    <span className="font-medium">Languages: {doctor.languages.join(", ")}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3 text-green-500" />
+                    <span className="font-medium">Available: {doctor.availability}</span>
+                  </div>
+                </div>
+
                 {/* Action Buttons */}
-                <div className="flex gap-2">
+                <div className="flex gap-3 mt-auto">
                   <motion.button
                     className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => window.open('tel:+1234567890', '_self')}
+                    onClick={() => window.open('tel:+91 8088058792', '_self')}
                   >
                     <Phone className="w-4 h-4" />
-                    Book Service
+                    Book Now
                   </motion.button>
                   <motion.button
                     className="flex-1 border-2 border-blue-500 text-blue-600 hover:bg-blue-50 font-semibold py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm"

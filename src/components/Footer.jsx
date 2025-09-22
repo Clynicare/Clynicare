@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 import { Activity, Phone, Mail, MapPin, Heart, Video, Shield, Clock, Star } from 'lucide-react';
 import { faApple, faGooglePlay, faFacebook, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,12 +51,14 @@ export default function Footer() {
           {/* Brand Section */}
           <div className='mb-8 lg:mb-0'>
             <div className='flex items-center mb-4'>
-              <Activity className="w-8 h-8 text-blue-500 mr-3" />
-              <Link href='/'>
-                <h1 className="font-bold text-4xl md:text-5xl bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text font-bebas">
-                  CLYNICARE
-                </h1>
-              </Link>
+              <Image
+                src="/images/Logo.png"
+                alt="Clynicare Logo"
+                width={230}
+                height={230}
+                className="w-40 h-40 object-contain rounded"
+                priority
+              />
             </div>
             <p className='text-gray-600 max-w-md text-lg leading-relaxed'>
               Revolutionizing healthcare with our hybrid tele-consultancy model. 

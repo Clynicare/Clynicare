@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,15 +78,20 @@ const Nav = () => {
           ? "bg-white/90 backdrop-blur-xl shadow-2xl border-b border-white/20"
           : "bg-gradient-to-r from-white/80 via-blue-50/80 to-cyan-50/80 backdrop-blur-lg"
       }`}
+      style={{ height: '80px' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex justify-between items-center h-full">
           <motion.div className="flex items-center space-x-2" whileHover={{ scale: 1.02 }}>
-            <Activity className="w-8 h-8 text-blue-500" />
-            <Link href="/">
-              <h1 className="font-bold text-4xl md:text-5xl bg-gradient-to-r from-blue-500 to-cyan-500 text-transparent bg-clip-text font-bebas">
-                CLYNICARE
-              </h1>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/Logo.png"
+                alt="Clynicare Logo"
+                width={230}
+                height={230}
+                className="w-40 h-40 object-contain"
+                priority
+              />
             </Link>
           </motion.div>
 

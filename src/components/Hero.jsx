@@ -1,12 +1,31 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Search, Phone, Sparkles, Heart } from "lucide-react";
+import { 
+  Search, Phone, Sparkles, Heart, Star, Shield, Clock, 
+  Users, CheckCircle, Calendar, ArrowRight, TrendingUp,
+  Award, Zap, MessageCircle
+} from "lucide-react";
+import Link from "next/link";
 import Nav from "./Nav";
 import Searchbox from "./Searchbox";
 
 const Hero = React.memo(() => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const trustMetrics = [
+    { icon: Users, value: "50+", label: "Early Patients" },
+    { icon: Star, value: "4.8/5", label: "Initial Rating" },
+    { icon: Shield, value: "4", label: "Expert Doctors" },
+    { icon: Clock, value: "24/7", label: "Available" }
+  ];
+
+  const urgencyMessages = [
+    "� New launch - 30% off first consultation",
+    "⚡ Early bird booking available",
+    "🏆 Join our founding patients"
+  ];
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 min-h-screen overflow-hidden relative flex flex-col">

@@ -1,13 +1,17 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Search, Filter, MapPin, Star, Stethoscope, Calendar, Users, Heart, Shield } from 'lucide-react';
+import axios from 'axios';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import NurseCard from '@/components/NurseCard';
 import NurseBookingModal from '@/components/NurseBookingModal';
 
 const NursesPage = () => {
+  const router = useRouter();
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
   const [nurses, setNurses] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +24,68 @@ const NursesPage = () => {
     availability: ''
   });
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000";
+  // Authentication helper functions
+  const checkAuthentication = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Show login required message
+      const loginMessage = document.createElement('div');
+      loginMessage.className = 'fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      loginMessage.innerHTML = `
+        <div class="flex items-center space-x-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <span>Please login to book services</span>
+        </div>
+      `;
+      document.body.appendChild(loginMessage);
+      
+      // Auto remove message and redirect
+      setTimeout(() => {
+        loginMessage.remove();
+        router.push('/Login');
+      }, 2000);
+      
+      return false;
+    }
+    return true;
+  };
+
+  const submitBookingToBackend = async (bookingData) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Authentication required');
+      }
+
+      const response = await axios.post(
+        `${API_BASE_URL}/api/nurse-bookings`,
+        bookingData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          timeout: 10000
+        }
+      );
+
+      if (response.status >= 200 && response.status < 300) {
+        return { success: true, data: response.data };
+      } else {
+        throw new Error('Booking submission failed');
+      }
+    } catch (error) {
+      console.error('Backend booking error:', error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem('token');
+        router.push('/Login');
+        throw new Error('Session expired. Please login again.');
+      }
+      throw new Error(error.response?.data?.message || 'Failed to submit booking. Please try again.');
+    }
+  };
 
   useEffect(() => {
     fetchNurses();
@@ -56,6 +121,11 @@ const NursesPage = () => {
   };
 
   const handleBookNurse = (nurse) => {
+    // Check authentication first
+    if (!checkAuthentication()) {
+      return;
+    }
+    
     setSelectedNurse(nurse);
     setIsBookingModalOpen(true);
   };
@@ -288,6 +358,55 @@ const NursesPage = () => {
       <NurseBookingModal
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
+        onConfirm={async (bookingData) => {
+          try {
+            // Add nurse_id to the booking data
+            const bookingWithNurse = {
+              ...bookingData,
+              nurse_id: selectedNurse?._id
+            };
+
+            // Use our backend submission helper
+            const result = await submitBookingToBackend(bookingWithNurse);
+            
+            console.log('Booking submitted successfully:', result);
+            
+            // Show success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successDiv.innerHTML = `
+              <div class="flex items-center space-x-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>Booking confirmed! We will contact you shortly.</span>
+              </div>
+            `;
+            document.body.appendChild(successDiv);
+            setTimeout(() => successDiv.remove(), 5000);
+            
+            // Close modal
+            setIsBookingModalOpen(false);
+            setSelectedNurse(null);
+            
+          } catch (error) {
+            console.error('Booking submission error:', error);
+            
+            // Show error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            errorDiv.innerHTML = `
+              <div class="flex items-center space-x-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>${error.message}</span>
+              </div>
+            `;
+            document.body.appendChild(errorDiv);
+            setTimeout(() => errorDiv.remove(), 5000);
+          }
+        }}
         nurse={selectedNurse}
         doctors={doctors}
       />
